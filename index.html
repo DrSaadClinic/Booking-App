@@ -3,80 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>حجز استشارة | د. سعد صبري الزبيدي</title>
+    <title>د. سعد صبري الزبيدي | حجز استشارة</title>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #004a99; --accent: #25d366; --text: #2c3e50; --border: rgba(255,255,255,0.3); }
+        :root { --primary: #0055ff; --secondary: #eef4fb; --text: #1d1d1f; --text-light: #86868b; --glass: rgba(255, 255, 255, 0.65); --border: rgba(255, 255, 255, 0.4); }
         
-        body { font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #f2f6f9 0%, #e8f0f6 100%); margin: 0; color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; -webkit-font-smoothing: antialiased; padding: 20px; box-sizing: border-box; overflow: hidden; /* For initial loading animation */}
-        
-        /* Glassmorphism Container */
-        .booking-container { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); max-width: 500px; width: 100%; border-radius: 28px; box-shadow: 0 15px 50px rgba(0,74,153,0.1); padding: 45px 35px; border: 1px solid var(--border); overflow: hidden; transform: translateY(100px); opacity: 0; animation: fadeSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-        
-        @keyframes fadeSlideUp { to { transform: translateY(0); opacity: 1; } }
-        
-        /* Animated Avatar Section */
-        .logo-section { text-align: center; margin-bottom: 35px; position: relative; }
-        .avatar-glow { width: 110px; height: 110px; border-radius: 50%; background: var(--primary); display: inline-flex; justify-content: center; align-items: center; box-shadow: 0 0 30px rgba(0,74,153,0.3); position: relative; z-index: 10; animation: pulseGlow 2s infinite; }
-        .avatar-glow img { width: 90%; height: 90%; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.7); }
-        .avatar-bg-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 130px; height: 130px; border-radius: 50%; background: rgba(0,74,153,0.05); animation: pulseExpand 2.5s infinite; z-index: 1; }
-        
-        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 30px rgba(0,74,153,0.3); } 50% { box-shadow: 0 0 50px rgba(0,74,153,0.5); } }
-        @keyframes pulseExpand { 0% { width: 130px; height: 130px; opacity: 1; } 100% { width: 180px; height: 180px; opacity: 0; } }
+        /* Smooth Apple-like Animated Background */
+        body { 
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif; 
+            margin: 0; color: var(--text); 
+            background: linear-gradient(-45deg, #f2f6fa, #e0eaf5, #d1e3f8, #f8f9fa);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh; 
+            -webkit-font-smoothing: antialiased; 
+            box-sizing: border-box;
+            overflow-x: hidden;
+            /* BUG FIX: Scroll unlocked */
+            overflow-y: auto; 
+            scroll-behavior: smooth;
+        }
 
-        /* Welcome Message & Headers */
-        h1 { margin: 15px 0 5px 0; font-size: 26px; color: var(--primary); font-weight: 800; }
-        p.welcome-text { margin: 0 0 20px 0; font-size: 16px; color: #555; font-weight: 700; opacity: 0.8; }
-        p.subtitle { display: inline-block; background: var(--primary); color: white; padding: 6px 15px; border-radius: 20px; font-size: 13px; font-weight: bold; margin-bottom: 25px; box-shadow: 0 3px 6px rgba(0,74,153,0.2); text-transform: uppercase; letter-spacing: 0.5px; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* Forms & Interactive Cascading Animation */
-        .input-group { margin-bottom: 22px; text-align: right; opacity: 0; animation: fadeIn 0.5s ease forwards; }
-        label { display: block; font-size: 14px; font-weight: bold; color: #555; margin-bottom: 9px; }
-        input, textarea { width: 100%; padding: 16px; border: 1px solid rgba(0,74,153,0.15); border-radius: 14px; font-size: 15px; background: rgba(255,255,255,0.6); box-sizing: border-box; transition: 0.3s; font-family: inherit; }
-        input:focus, textarea:focus { border-color: var(--primary); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(0, 74, 153, 0.1); }
+        /* Universal Glassmorphism Panel */
+        .glass-panel { 
+            background: var(--glass); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px); 
+            max-width: 550px; width: 90%; 
+            margin: 40px auto;
+            border-radius: 30px; 
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255,255,255,0.8); 
+            padding: 40px 30px; 
+            border: 1px solid var(--border); 
+        }
+
+        /* -----------------------------------------
+           SPLASH SCREEN (5-SECOND INTRO)
+        ------------------------------------------ */
+        #splashScreen {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .splash-hidden { opacity: 0; transform: scale(0.95); pointer-events: none; position: absolute; visibility: hidden; }
+
+        .logo-large { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 10px 30px rgba(0,85,255,0.2); margin-bottom: 20px; animation: floatLogo 4s ease-in-out infinite; }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .doc-title { font-size: 28px; font-weight: 800; color: var(--primary); margin: 0 0 5px 0; letter-spacing: -0.5px; }
+        .doc-subtitle { font-size: 16px; color: var(--text-light); font-weight: 700; margin: 0 0 25px 0; }
+
+        .info-card { background: rgba(255,255,255,0.7); border-radius: 20px; padding: 20px; margin-bottom: 25px; text-align: right; box-shadow: 0 4px 15px rgba(0,0,0,0.02); width: 100%; box-sizing: border-box; }
+        .info-card p { margin: 8px 0; font-size: 15px; line-height: 1.6; font-weight: 500; }
+        .info-card strong { color: var(--primary); }
+
+        /* Apple-Style Specialty Tags */
+        .specialty-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 25px; }
+        .spec-tag { background: white; color: #333; padding: 10px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); }
+
+        .contact-box { background: var(--secondary); color: var(--primary); padding: 15px; border-radius: 16px; font-weight: 700; font-size: 14px; margin-bottom: 20px; }
+
+        /* The 5-Second Loading Bar */
+        .loader-container { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; margin-top: 10px; position: relative; }
+        .loader-bar { height: 100%; width: 0%; background: var(--primary); border-radius: 10px; animation: loadProgress 5s linear forwards; }
+        @keyframes loadProgress { 0% { width: 0%; } 100% { width: 100%; } }
+        .skip-btn { background: none; border: none; color: var(--text-light); font-size: 13px; margin-top: 15px; cursor: pointer; text-decoration: underline; font-family: inherit; }
+
+        /* -----------------------------------------
+           BOOKING FORM SCREEN
+        ------------------------------------------ */
+        #bookingContainer {
+            display: none; opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .booking-visible { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
+
+        .form-header { text-align: center; margin-bottom: 30px; }
+        .form-header img { width: 70px; height: 70px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px; border: 2px solid white; }
+        .form-header h2 { margin: 0; font-size: 22px; color: var(--primary); font-weight: 800; }
+
+        .input-group { margin-bottom: 20px; text-align: right; }
+        label { display: block; font-size: 14px; font-weight: 700; color: #444; margin-bottom: 8px; }
+        input, textarea { width: 100%; padding: 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; font-size: 15px; background: rgba(255,255,255,0.8); box-sizing: border-box; transition: 0.3s; font-family: inherit; }
+        input:focus, textarea:focus { border-color: var(--primary); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.15); }
         textarea { resize: none; min-height: 100px; }
 
-        @keyframes fadeIn { to { opacity: 1; } }
+        .mcq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .mcq-chip { background: rgba(255,255,255,0.5); border: 2px solid transparent; padding: 14px; text-align: center; border-radius: 16px; font-weight: 700; font-size: 14px; color: #555; cursor: pointer; transition: 0.2s; user-select: none; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .mcq-chip:hover { transform: scale(1.02); background: white; }
+        .mcq-chip.active { background: #fff; border-color: var(--primary); color: var(--primary); box-shadow: 0 8px 20px rgba(0, 85, 255, 0.15); }
 
-        /* MCQ Chips Cascading */
-        .mcq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; opacity: 0; animation: fadeIn 0.5s ease forwards; }
-        .mcq-chip { background: rgba(0,74,153,0.05); border: 2px solid transparent; padding: 14px; text-align: center; border-radius: 14px; font-weight: bold; font-size: 15px; color: #555; cursor: pointer; transition: 0.2s; user-select: none; }
-        .mcq-chip:hover { background: rgba(0,74,153,0.1); transform: translateY(-1px); }
-        .mcq-chip.active { background: #eef4fb; border-color: var(--primary); color: var(--primary); box-shadow: 0 4px 10px rgba(0, 74, 153, 0.15); }
+        .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer; transition: transform 0.1s, box-shadow 0.2s; margin-top: 15px; box-shadow: 0 10px 25px rgba(0, 85, 255, 0.3); font-family: inherit; }
+        .submit-btn:hover { box-shadow: 0 12px 30px rgba(0, 85, 255, 0.4); transform: translateY(-2px); }
+        .submit-btn:active { transform: scale(0.97); }
+        .submit-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; transform: none; }
 
-        /* Staggered Delay for Form Groups */
-        .input-group:nth-of-type(1) { animation-delay: 0.9s; }
-        .input-group:nth-of-type(2) { animation-delay: 1.1s; }
-        .input-group:nth-of-type(3) { animation-delay: 1.3s; }
-        .input-group:nth-of-type(4) { animation-delay: 1.5s; }
-        .submit-btn-group { animation-delay: 1.7s; }
-
-        /* The Ultimate Submit Button */
-        .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 19px; border-radius: 14px; font-size: 18px; font-weight: bold; cursor: pointer; transition: transform 0.1s, box-shadow 0.2s; margin-top: 15px; box-shadow: 0 4px 15px rgba(0, 74, 153, 0.3); font-family: inherit; }
-        .submit-btn:hover { box-shadow: 0 6px 20px rgba(0, 74, 153, 0.4); transform: translateY(-1px); }
-        .submit-btn:active { transform: scale(0.98); box-shadow: 0 2px 5px rgba(0,74,153,0.2); }
-        .submit-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
-
-        /* Success Screen Glassmorphism */
-        #successScreen { display: none; text-align: center; padding: 50px 0; animation: fadeInSuccess 0.5s ease; }
-        @keyframes fadeInSuccess { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .check-icon { font-size: 50px; color: #28a745; margin-bottom: 25px; }
+        #successScreen { display: none; text-align: center; padding: 40px 0; }
+        .check-icon { font-size: 60px; color: #28a745; margin-bottom: 20px; animation: popIn 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        @keyframes popIn { 0% { transform: scale(0); } 80% { transform: scale(1.2); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-<div class="booking-container">
+<div id="splashScreen" class="glass-panel">
+    <img src="logo.jpg" class="logo-large" alt="Dr. Saad Sabry" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
+    <h1 class="doc-title">د. سعد صبري الزبيدي</h1>
+    <p class="doc-subtitle">جراح عام متخصص بالجراحة المتقدمة والمنظار</p>
+
+    <div class="info-card">
+        <p>🔹 خبرة في أصعب الحالات الجراحية والمعقدة.</p>
+        <p>🔹 يعتمد تقنيات حديثة تقلل الألم وتسرّع التعافي.</p>
+    </div>
+
+    <div class="specialty-grid">
+        <div class="spec-tag">جراحة المنظار المتقدمة</div>
+        <div class="spec-tag">تجميل البطن</div>
+        <div class="spec-tag">الناسور الشرجي المعقد</div>
+        <div class="spec-tag">الفتق بكافة أنواعه</div>
+        <div class="spec-tag">جراحات الكبد والمرارة</div>
+        <div class="spec-tag">جراحات السمنة</div>
+        <div class="spec-tag">جراحات الأورام</div>
+        <div class="spec-tag">جراحات الغدة الدرقية</div>
+    </div>
+
+    <div class="contact-box">
+        📍 حي الجامعة - شارع الإدارة والاقتصاد<br>
+        عمارة مختبر الدوحة - الطابق الأول<br><br>
+        📞 واتساب العيادة: 07707684499
+    </div>
+
+    <div style="width: 100%; max-width: 300px; margin: 0 auto;">
+        <div class="loader-container"><div class="loader-bar"></div></div>
+        <button class="skip-btn" onclick="showBookingForm()">تخطي للانتقال إلى الحجز</button>
+    </div>
+</div>
+
+<div id="bookingContainer" class="glass-panel">
     <div id="bookingForm">
-        <div class="logo-section">
-            <div class="avatar-glow">
-                <img src="logo.jpg" alt="Dr. Saad Sabry" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
-            </div>
-            <div class="avatar-bg-circle"></div>
-            <h1>د. سعد صبري الزبيدي</h1>
-            <p class="welcome-text">أهلاً بكم.. صحتكم أولويتنا</p>
-            <p class="subtitle">حجز استشارة جراحية أونلاين</p>
+        <div class="form-header">
+            <img src="logo.jpg" alt="Dr. Saad Sabry" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
+            <h2>طلب استشارة جراحية أونلاين</h2>
         </div>
 
         <div class="input-group">
@@ -96,7 +165,7 @@
 
         <div class="input-group">
             <label>منذ متى تشعر بالأعراض؟</label>
-            <div class="mcq-grid" id="durationGrid">
+            <div class="mcq-grid">
                 <div class="mcq-chip" onclick="selectDuration(this, 'شهر و اكثر')">شهر و اكثر</div>
                 <div class="mcq-chip" onclick="selectDuration(this, '٣ أشهر و اكثر')">٣ أشهر و اكثر</div>
                 <div class="mcq-chip" onclick="selectDuration(this, '٦ أشهر و اكثر')">٦ أشهر و اكثر</div>
@@ -105,15 +174,13 @@
             <input type="hidden" id="ptDuration" value="">
         </div>
 
-        <div class="input-group submit-btn-group">
-            <button class="submit-btn" id="submitBtn" onclick="submitRequest()">إرسال طلب الحجز 🔐</button>
-        </div>
+        <button class="submit-btn" id="submitBtn" onclick="submitRequest()">إرسال طلب الحجز 🔐</button>
     </div>
 
     <div id="successScreen">
         <div class="check-icon">✓</div>
-        <h2 style="color: #2c3e50; margin-bottom: 12px;">تم استلام طلبك بأمان</h2>
-        <p style="color: #666; line-height: 1.6; font-size: 16px;">شكراً لثقتك.. ستقوم السكرتارية بالتواصل معك قريباً عبر الواتساب لتأكيد موعدك النهائي.</p>
+        <h2 style="color: var(--primary); margin-bottom: 12px; font-weight: 800;">تم استلام طلبك بأمان</h2>
+        <p style="color: #555; line-height: 1.6; font-size: 16px; font-weight: 500;">شكراً لثقتك.. ستقوم السكرتارية بالتواصل معك قريباً عبر الواتساب لتأكيد موعدك النهائي.</p>
     </div>
 </div>
 
@@ -131,6 +198,23 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
+
+    // The 5-Second Splash Screen Logic
+    let splashTimeout = setTimeout(showBookingForm, 5000);
+
+    function showBookingForm() {
+        clearTimeout(splashTimeout);
+        const splash = document.getElementById('splashScreen');
+        const form = document.getElementById('bookingContainer');
+        
+        splash.classList.add('splash-hidden');
+        setTimeout(() => {
+            splash.style.display = 'none';
+            form.classList.add('booking-visible');
+            // Scroll to top automatically when form appears
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 500); // wait for fade out
+    }
 
     function selectDuration(element, value) {
         document.querySelectorAll('.mcq-chip').forEach(chip => chip.classList.remove('active'));
@@ -167,6 +251,7 @@
             .then(() => {
                 document.getElementById('bookingForm').style.display = 'none';
                 document.getElementById('successScreen').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             })
             .catch((error) => {
                 alert("حدث خطأ في الشبكة. يرجى المحاولة مرة أخرى.");
