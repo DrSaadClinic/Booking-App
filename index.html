@@ -21,7 +21,6 @@
             -webkit-font-smoothing: antialiased; 
             box-sizing: border-box;
             overflow-x: hidden;
-            /* BUG FIX: Scroll unlocked */
             overflow-y: auto; 
             scroll-behavior: smooth;
         }
@@ -85,7 +84,7 @@
         .form-header img { width: 70px; height: 70px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px; border: 2px solid white; }
         .form-header h2 { margin: 0; font-size: 22px; color: var(--primary); font-weight: 800; }
 
-        .input-group { margin-bottom: 20px; text-align: right; }
+        .input-group { margin-bottom: 20px; text-align: right; opacity: 0; animation: fadeIn 0.5s ease forwards; }
         label { display: block; font-size: 14px; font-weight: 700; color: #444; margin-bottom: 8px; }
         input, textarea { width: 100%; padding: 16px; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; font-size: 15px; background: rgba(255,255,255,0.8); box-sizing: border-box; transition: 0.3s; font-family: inherit; }
         input:focus, textarea:focus { border-color: var(--primary); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.15); }
@@ -95,6 +94,16 @@
         .mcq-chip { background: rgba(255,255,255,0.5); border: 2px solid transparent; padding: 14px; text-align: center; border-radius: 16px; font-weight: 700; font-size: 14px; color: #555; cursor: pointer; transition: 0.2s; user-select: none; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .mcq-chip:hover { transform: scale(1.02); background: white; }
         .mcq-chip.active { background: #fff; border-color: var(--primary); color: var(--primary); box-shadow: 0 8px 20px rgba(0, 85, 255, 0.15); }
+
+        /* Staggered Delay for Form Groups (Updated for Age) */
+        .input-group:nth-of-type(1) { animation-delay: 0.8s; } /* Name */
+        .input-group:nth-of-type(2) { animation-delay: 1.0s; } /* Age */
+        .input-group:nth-of-type(3) { animation-delay: 1.2s; } /* Phone */
+        .input-group:nth-of-type(4) { animation-delay: 1.4s; } /* Symptom */
+        .input-group:nth-of-type(5) { animation-delay: 1.6s; } /* Duration */
+        .submit-btn-group { animation-delay: 1.8s; }
+
+        @keyframes fadeIn { to { opacity: 1; } }
 
         .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 18px; border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer; transition: transform 0.1s, box-shadow 0.2s; margin-top: 15px; box-shadow: 0 10px 25px rgba(0, 85, 255, 0.3); font-family: inherit; }
         .submit-btn:hover { box-shadow: 0 12px 30px rgba(0, 85, 255, 0.4); transform: translateY(-2px); }
@@ -154,6 +163,11 @@
         </div>
 
         <div class="input-group">
+            <label>العمر</label>
+            <input type="number" id="ptAge" placeholder="أدخل العمر" required style="text-align: right;">
+        </div>
+
+        <div class="input-group">
             <label>رقم الهاتف (واتساب)</label>
             <input type="tel" id="ptPhone" placeholder="07XX XXX XXXX" required dir="ltr" style="text-align: right;">
         </div>
@@ -174,7 +188,9 @@
             <input type="hidden" id="ptDuration" value="">
         </div>
 
-        <button class="submit-btn" id="submitBtn" onclick="submitRequest()">إرسال طلب الحجز 🔐</button>
+        <div class="input-group submit-btn-group" style="margin-bottom: 0;">
+            <button class="submit-btn" id="submitBtn" onclick="submitRequest()">إرسال طلب الحجز 🔐</button>
+        </div>
     </div>
 
     <div id="successScreen">
@@ -211,9 +227,8 @@
         setTimeout(() => {
             splash.style.display = 'none';
             form.classList.add('booking-visible');
-            // Scroll to top automatically when form appears
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 500); // wait for fade out
+        }, 500); 
     }
 
     function selectDuration(element, value) {
@@ -224,11 +239,12 @@
 
     function submitRequest() {
         const name = document.getElementById('ptName').value.trim();
+        const age = document.getElementById('ptAge').value.trim();
         const phone = document.getElementById('ptPhone').value.trim();
         const symptom = document.getElementById('ptSymptom').value.trim();
         const duration = document.getElementById('ptDuration').value;
 
-        if (!name || !phone || !symptom || !duration) {
+        if (!name || !age || !phone || !symptom || !duration) {
             alert("يرجى ملء جميع الحقول المطلوبة واختيار مدة الأعراض قبل الإرسال.");
             return;
         }
@@ -240,6 +256,7 @@
         // SEND TO THE ISOLATED "WAITING ROOM" IN FIREBASE
         const requestData = {
             name: name,
+            age: age,
             phone: phone,
             symptom: symptom,
             duration: duration,
