@@ -10,7 +10,6 @@
     <style>
         :root { --primary: #0055ff; --secondary: #eef4fb; --text: #1d1d1f; --text-light: #86868b; --glass: rgba(255, 255, 255, 0.65); --border: rgba(255, 255, 255, 0.4); }
         
-        /* Smooth Apple-like Animated Background */
         body { 
             font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif; 
             margin: 0; color: var(--text); 
@@ -27,7 +26,6 @@
 
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* Universal Glassmorphism Panel */
         .glass-panel { 
             background: var(--glass); 
             backdrop-filter: blur(25px); 
@@ -40,9 +38,6 @@
             border: 1px solid var(--border); 
         }
 
-        /* -----------------------------------------
-           SPLASH SCREEN (5-SECOND INTRO)
-        ------------------------------------------ */
         #splashScreen {
             display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
             transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -59,21 +54,16 @@
         .info-card p { margin: 8px 0; font-size: 15px; line-height: 1.6; font-weight: 500; }
         .info-card strong { color: var(--primary); }
 
-        /* Apple-Style Specialty Tags */
         .specialty-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 25px; }
         .spec-tag { background: white; color: #333; padding: 10px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); }
 
         .contact-box { background: var(--secondary); color: var(--primary); padding: 15px; border-radius: 16px; font-weight: 700; font-size: 14px; margin-bottom: 20px; }
 
-        /* The 5-Second Loading Bar */
         .loader-container { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; margin-top: 10px; position: relative; }
         .loader-bar { height: 100%; width: 0%; background: var(--primary); border-radius: 10px; animation: loadProgress 5s linear forwards; }
         @keyframes loadProgress { 0% { width: 0%; } 100% { width: 100%; } }
         .skip-btn { background: none; border: none; color: var(--text-light); font-size: 13px; margin-top: 15px; cursor: pointer; text-decoration: underline; font-family: inherit; }
 
-        /* -----------------------------------------
-           BOOKING FORM SCREEN
-        ------------------------------------------ */
         #bookingContainer {
             display: none; opacity: 0; transform: translateY(40px);
             transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -84,7 +74,6 @@
         .form-header img { width: 70px; height: 70px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px; border: 2px solid white; }
         .form-header h2 { margin: 0; font-size: 22px; color: var(--primary); font-weight: 800; }
 
-        /* The Animated Discount Badge */
         .discount-badge {
             background: linear-gradient(135deg, #ff9800, #ff5722);
             color: white;
@@ -107,19 +96,17 @@
         textarea { resize: none; min-height: 100px; }
 
         .mcq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        /* 3-column grid specifically for the days */
         .mcq-grid.days-grid { grid-template-columns: 1fr 1fr 1fr; } 
         .mcq-chip { background: rgba(255,255,255,0.5); border: 2px solid transparent; padding: 14px; text-align: center; border-radius: 16px; font-weight: 700; font-size: 14px; color: #555; cursor: pointer; transition: 0.2s; user-select: none; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .mcq-chip:hover { transform: scale(1.02); background: white; }
         .mcq-chip.active { background: #fff; border-color: var(--primary); color: var(--primary); box-shadow: 0 8px 20px rgba(0, 85, 255, 0.15); }
 
-        /* Staggered Delay for Form Groups */
         .input-group:nth-of-type(1) { animation-delay: 0.8s; } 
         .input-group:nth-of-type(2) { animation-delay: 1.0s; } 
         .input-group:nth-of-type(3) { animation-delay: 1.2s; } 
         .input-group:nth-of-type(4) { animation-delay: 1.4s; } 
         .input-group:nth-of-type(5) { animation-delay: 1.6s; } 
-        .input-group:nth-of-type(6) { animation-delay: 1.8s; } /* Day selector */
+        .input-group:nth-of-type(6) { animation-delay: 1.8s; } 
         .submit-btn-group { animation-delay: 2.0s; }
 
         @keyframes fadeIn { to { opacity: 1; } }
@@ -132,7 +119,6 @@
         .whatsapp-btn { background: #25d366; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); }
         .whatsapp-btn:hover { box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4); }
         
-        /* The aggressive heartbeat animation to force clicking */
         .force-pulse { animation: pulseWhatsApp 1.5s infinite; }
         @keyframes pulseWhatsApp { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); } }
 
@@ -268,9 +254,8 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // ⭐ TELEGRAM BOT CONFIGURATION
-    const telegramBotToken = "8488908918:AAEcd6Kq7NJHZfNDljp6ZsEeURM3Bfvu6hU";
-    const telegramChatId = "51069776";
+    // ⭐ YOUR SECURE GOOGLE MIDDLEMAN
+    const secureGoogleVaultUrl = "https://script.google.com/macros/s/AKfycbyJ6VCB9wXgMP-txhLSANSbSfyjBO75rOCYxwL2uzmeZdq14gUM4fNh2Rg3d6SVo34/exec";
 
     let splashTimeout = setTimeout(showBookingForm, 5000);
 
@@ -316,7 +301,6 @@
         btn.innerText = "جاري التأمين والإرسال...";
         btn.disabled = true;
 
-        // Bundling the Day directly into the duration string so it instantly appears in the Master Dashboard without extra code changes!
         const mergedDuration = `${duration} | المفضلة: ${day}`;
 
         const requestData = {
@@ -327,24 +311,19 @@
             duration: mergedDuration, 
             timestamp: new Date().toISOString(),
             status: "pending",
-            discount: "20k applied"
+            discount: "20,000 د.ع"
         };
 
-        // 1. SEND TO FIREBASE
+        // 1. SEND TO FIREBASE FOR SECRETARY
         db.ref('pendingBookings').push(requestData)
             .then(() => {
-                // ⭐ 2. SILENTLY FIRE TELEGRAM ALERT
-                const telegramMsg = `🚨 *حجز جديد من الموقع* 🚨\n\n👤 *الاسم:* ${name}\n🔢 *العمر:* ${age} سنة\n📞 *الرقم:* ${phone}\n🩺 *الأعراض:* ${symptom}\n⏳ *المدة:* ${duration}\n🗓️ *اليوم المفضل:* ${day}\n🎁 *الخصم:* 20,000 د.ع`;
                 
-                fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        chat_id: telegramChatId,
-                        text: telegramMsg,
-                        parse_mode: "Markdown"
-                    })
-                }).catch(err => console.log("Telegram Error: ", err));
+                // ⭐ 2. SEND TO GOOGLE VAULT FOR TELEGRAM (NO TOKENS EXPOSED)
+                fetch(secureGoogleVaultUrl, {
+                    method: 'POST',
+                    mode: 'no-cors', // Bypasses browser security blocks smoothly
+                    body: JSON.stringify(requestData)
+                }).catch(err => console.log("Silent error handled"));
 
                 // 3. SHOW SUCCESS SCREEN
                 document.getElementById('bookingForm').style.display = 'none';
