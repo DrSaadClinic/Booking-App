@@ -10,7 +10,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1246010164377025');
+    fbq('init', '1246010164377025'); 
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
@@ -343,7 +343,7 @@
             .then(() => {
                 
                 // ⭐ TRIGGER META PIXEL "SCHEDULE" EVENT HERE
-                // This tells Meta the patient actually booked.
+                // This converts a visitor into a 'Lead' for Meta.
                 fbq('track', 'Schedule', {
                     content_name: 'Dr_Saad_Appointment',
                     currency: 'IQD',
@@ -374,7 +374,7 @@
         const day = document.getElementById('ptDay').value;
         const msg = encodeURIComponent(`مرحباً عيادة د. سعد صبري،\nلقد قمت للتو بتسجيل حجز إلكتروني باسم (${name}) ليوم (${day}).\nأرجو تأكيد الموعد علماً أنني مشمول بخصم الحجز الإلكتروني (الكشفية 20 ألف دينار). شكراً لكم.`);
         
-        // Optional: Track a custom event for WhatsApp clicks too
+        // Track a custom event for the WhatsApp click
         fbq('trackCustom', 'WhatsAppContact');
 
         window.open(`https://wa.me/9647707684499?text=${msg}`, '_blank');
