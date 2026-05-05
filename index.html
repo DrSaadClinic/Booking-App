@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>د. سعد صبري الزبيدي | حجز استشارة</title>
-
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -18,421 +17,355 @@
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1270959085105678&ev=PageView&noscript=1"
-    /></noscript>
-
+    src="https://www.facebook.com/tr?id=1270959085105678&ev=PageView&noscript=1"/></noscript>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#F5F5F7;--card:#FFFFFF;--text-1:#1D1D1F;--text-2:#6E6E73;--text-3:#AEAEB2;
+            --accent:#0071E3;--accent-hover:#0077ED;--accent-bg:rgba(0,113,227,0.06);
+            --accent-ring:rgba(0,113,227,0.24);--green:#30D158;--green-dark:#28B84D;
+            --green-bg:rgba(48,209,88,0.08);--orange:#FF9F0A;--orange-bg:rgba(255,159,10,0.07);
+            --sep:rgba(60,60,67,0.06);--input-bg:#F5F5F7;
+            --r-sm:10px;--r-md:14px;--r-lg:20px;
+            --shadow:0 0.5px 0 0 rgba(0,0,0,0.04),0 2px 8px rgba(0,0,0,0.04);
+            --ease:cubic-bezier(0.25,0.1,0.25,1);
+        }
+        body{
+            font-family:'Tajawal',-apple-system,BlinkMacSystemFont,sans-serif;
+            background:var(--bg);color:var(--text-1);min-height:100vh;
+            -webkit-font-smoothing:antialiased;overflow-x:hidden;
+        }
+        .page{max-width:460px;width:100%;margin:0 auto;padding:48px 20px 60px}
 
-        :root {
-            --bg: #F5F5F7;
-            --card: #FFFFFF;
-            --text-1: #1D1D1F;
-            --text-2: #6E6E73;
-            --text-3: #AEAEB2;
-            --accent: #0071E3;
-            --accent-hover: #0077ED;
-            --accent-bg: rgba(0, 113, 227, 0.06);
-            --accent-ring: rgba(0, 113, 227, 0.24);
-            --green: #30D158;
-            --green-dark: #28B84D;
-            --green-bg: rgba(48, 209, 88, 0.08);
-            --orange: #FF9F0A;
-            --orange-bg: rgba(255, 159, 10, 0.07);
-            --red: #FF453A;
-            --red-bg: rgba(255, 69, 58, 0.05);
-            --sep: rgba(60, 60, 67, 0.06);
-            --input-bg: #F5F5F7;
-            --r-sm: 10px;
-            --r-md: 14px;
-            --r-lg: 20px;
-            --shadow: 0 0.5px 0 0 rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.04);
-            --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
+        /* Animations */
+        .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .55s var(--ease) forwards}
+        @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-        body {
-            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text-1);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+        /* Hero */
+        .hero{text-align:center;margin-bottom:28px}
+        .hero-img{
+            width:96px;height:96px;border-radius:50%;object-fit:cover;
+            margin-bottom:14px;box-shadow:0 4px 20px rgba(0,0,0,0.08);
+            border:3px solid #fff;
         }
+        .hero-name{font-size:28px;font-weight:800;letter-spacing:-0.4px;margin-bottom:2px}
+        .hero-sub{font-size:15px;color:var(--text-2);line-height:1.5;margin-bottom:16px}
 
-        /* ── Screen System ── */
-        .screen {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 0 20px;
+        /* Trust Bar */
+        .trust{
+            display:flex;justify-content:center;gap:24px;
+            margin-bottom:8px;
         }
-        .screen.off { display: none; }
-        .screen-inner {
-            max-width: 460px;
-            width: 100%;
-            padding: 56px 0 48px;
+        .trust-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text-2)}
+        .trust-icon{
+            width:28px;height:28px;border-radius:8px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:14px;
         }
+        .trust-icon.blue{background:var(--accent-bg);color:var(--accent)}
+        .trust-icon.green{background:var(--green-bg);color:var(--green)}
+        .trust-num{font-weight:800;color:var(--text-1);font-size:15px}
 
-        .enter { animation: enter 0.55s var(--ease) both; }
-        .exit  { animation: exit  0.35s var(--ease) both; }
+        /* Specialties - plain text, NOT clickable */
+        .specs{
+            text-align:center;font-size:13px;color:var(--text-3);
+            line-height:1.8;margin-bottom:28px;
+        }
+        .specs span{
+            display:inline;
+            /* No background, no border, no hover — pure text */
+        }
+        .spec-sep{margin:0 2px;color:var(--text-3);opacity:0.5}
 
-        @keyframes enter {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
+        /* Discount Banner */
+        .discount{
+            background:linear-gradient(135deg,rgba(255,159,10,0.1) 0%,rgba(255,159,10,0.04) 100%);
+            border:1px solid rgba(255,159,10,0.15);
+            border-radius:var(--r-lg);padding:18px 20px;margin-bottom:32px;
+            display:flex;align-items:center;gap:14px;
         }
-        @keyframes exit {
-            from { opacity: 1; transform: translateY(0); }
-            to   { opacity: 0; transform: translateY(-16px); }
+        .discount-badge{
+            width:44px;height:44px;border-radius:12px;
+            background:linear-gradient(135deg,#FF9F0A,#FFB340);color:#fff;
+            display:flex;align-items:center;justify-content:center;flex-shrink:0;
+            font-size:20px;font-weight:800;
         }
+        .discount-text{font-size:15px;font-weight:500;line-height:1.6;color:var(--text-1)}
+        .discount-text b{color:#E08600;font-weight:700}
+        .discount-text s{color:var(--text-3);font-weight:400}
 
-        .stagger { opacity: 0; animation: enter 0.55s var(--ease) both; }
+        /* Form Section */
+        .form-section{
+            background:var(--card);border-radius:var(--r-lg);
+            box-shadow:var(--shadow);padding:28px 22px;margin-bottom:24px;
+        }
+        .form-h{font-size:20px;font-weight:800;margin-bottom:4px}
+        .form-p{font-size:14px;color:var(--text-2);margin-bottom:24px;line-height:1.5}
 
-        /* ── Intro ── */
-        .hero { text-align: center; margin-bottom: 36px; }
-        .hero-img {
-            width: 88px; height: 88px; border-radius: 50%;
-            object-fit: cover; margin-bottom: 18px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        .field{margin-bottom:16px}
+        .field-lbl{display:block;font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:6px}
+        .field-in{
+            width:100%;padding:14px 16px;background:var(--input-bg);
+            border:1.5px solid transparent;border-radius:var(--r-md);
+            font-size:17px;font-weight:400;font-family:inherit;
+            color:var(--text-1);outline:none;transition:all .25s var(--ease);
         }
-        .hero-name {
-            font-size: 26px; font-weight: 800;
-            letter-spacing: -0.4px; margin-bottom: 4px;
+        .field-in::placeholder{color:var(--text-3)}
+        .field-in:focus{
+            background:var(--card);border-color:var(--accent);
+            box-shadow:0 0 0 3.5px var(--accent-ring);
         }
-        .hero-sub {
-            font-size: 15px; font-weight: 400;
-            color: var(--text-2); line-height: 1.5;
-        }
+        .field-in.ltr{direction:ltr;text-align:right}
 
-        /* Card */
-        .card {
-            background: var(--card);
-            border-radius: var(--r-lg);
-            box-shadow: var(--shadow);
-            padding: 0;
-            margin-bottom: 16px;
-            overflow: hidden;
+        /* Day chips */
+        .chip-lbl{font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:8px}
+        .chips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
+        .chip{
+            background:var(--input-bg);border:1.5px solid transparent;
+            padding:13px 10px;text-align:center;border-radius:var(--r-md);
+            font-size:15px;font-weight:500;color:var(--text-2);
+            cursor:pointer;user-select:none;transition:all .2s var(--ease);
+            -webkit-tap-highlight-color:transparent;
         }
-        .card-row {
-            display: flex; align-items: flex-start; gap: 14px;
-            padding: 16px 20px;
-        }
-        .card-row + .card-row { border-top: 0.5px solid var(--sep); }
-        .card-icon {
-            width: 34px; height: 34px; border-radius: var(--r-sm);
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; color: var(--accent); background: var(--accent-bg);
-        }
-        .card-icon svg { width: 16px; height: 16px; }
-        .card-icon.orange { color: var(--orange); background: var(--orange-bg); }
-        .card-lbl {
-            font-size: 11px; font-weight: 600; color: var(--text-3);
-            text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 1px;
-        }
-        .card-val {
-            font-size: 15px; font-weight: 500; color: var(--text-1); line-height: 1.45;
-        }
-        .card-val a { color: var(--accent); text-decoration: none; }
-
-        /* Tags */
-        .tags { margin-bottom: 36px; }
-        .tags-head {
-            font-size: 11px; font-weight: 700; color: var(--text-3);
-            text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px;
-        }
-        .tags-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag {
-            background: var(--card); border: 0.5px solid var(--sep);
-            padding: 7px 15px; border-radius: 100px;
-            font-size: 13px; font-weight: 500; color: var(--text-2);
+        .chip:hover{background:#EDEDF0}
+        .chip.on{
+            background:var(--accent-bg);border-color:var(--accent);
+            color:var(--accent);font-weight:600;
         }
 
-        /* Buttons */
-        .btn {
-            display: block; width: 100%; border: none;
-            padding: 16px 24px; border-radius: var(--r-md);
-            font-size: 17px; font-weight: 700; font-family: inherit;
-            cursor: pointer; transition: all 0.2s var(--ease);
-            text-align: center; text-decoration: none;
+        /* Submit Button */
+        .btn-submit{
+            display:block;width:100%;border:none;
+            padding:16px 24px;border-radius:var(--r-md);
+            font-size:17px;font-weight:700;font-family:inherit;
+            cursor:pointer;transition:all .2s var(--ease);
+            text-align:center;background:var(--green);color:#fff;
         }
-        .btn:active { transform: scale(0.975); }
-        .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-        .btn-primary { background: var(--accent); color: #fff; }
-        .btn-primary:hover { background: var(--accent-hover); }
-        .btn-secondary {
-            background: var(--card); color: var(--accent);
-            box-shadow: var(--shadow); margin-top: 10px;
-        }
-        .btn-green { background: var(--green); color: #fff; }
-        .btn-green:hover { background: var(--green-dark); }
+        .btn-submit:hover{background:var(--green-dark)}
+        .btn-submit:active{transform:scale(0.975)}
+        .btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none}
 
-        /* ── Form ── */
-        .back {
-            display: inline-flex; align-items: center; gap: 4px;
-            background: none; border: none; color: var(--accent);
-            font-size: 17px; font-weight: 500; font-family: inherit;
-            cursor: pointer; padding: 6px 0; margin-bottom: 20px;
+        /* Clinic Info Card */
+        .info-card{
+            background:var(--card);border-radius:var(--r-lg);
+            box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;
         }
-        .back svg { width: 18px; height: 18px; }
+        .info-row{
+            display:flex;align-items:flex-start;gap:14px;padding:14px 20px;
+        }
+        .info-row+.info-row{border-top:.5px solid var(--sep)}
+        .info-icon{
+            width:32px;height:32px;border-radius:var(--r-sm);
+            display:flex;align-items:center;justify-content:center;
+            flex-shrink:0;font-size:15px;
+        }
+        .info-icon.blue{color:var(--accent);background:var(--accent-bg)}
+        .info-icon.org{color:var(--orange);background:var(--orange-bg)}
+        .info-lbl{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px}
+        .info-val{font-size:14px;font-weight:500;color:var(--text-1);line-height:1.45}
+        .info-val a{color:var(--accent);text-decoration:none}
 
-        .form-h { font-size: 26px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 6px; }
-        .form-p { font-size: 15px; color: var(--text-2); margin-bottom: 32px; line-height: 1.5; }
+        /* Success Overlay */
+        .overlay{
+            position:fixed;inset:0;background:rgba(0,0,0,0.4);
+            backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+            z-index:1000;display:none;align-items:center;justify-content:center;
+            padding:20px;
+        }
+        .overlay.show{display:flex}
+        .success-card{
+            background:var(--card);border-radius:24px;padding:36px 28px;
+            max-width:400px;width:100%;text-align:center;
+            box-shadow:0 20px 60px rgba(0,0,0,0.15);
+            animation:popIn .4s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+        @keyframes popIn{
+            from{opacity:0;transform:scale(0.9) translateY(20px)}
+            to{opacity:1;transform:scale(1) translateY(0)}
+        }
+        .ok-circle{
+            width:72px;height:72px;border-radius:50%;background:var(--green-bg);
+            display:flex;align-items:center;justify-content:center;
+            margin:0 auto 18px;
+        }
+        .ok-svg{width:32px;height:32px}
+        .ok-svg path{
+            stroke:var(--green);stroke-width:2.8;stroke-linecap:round;
+            stroke-linejoin:round;fill:none;
+            stroke-dasharray:44;stroke-dashoffset:44;
+            animation:draw .45s .15s var(--ease) forwards;
+        }
+        @keyframes draw{to{stroke-dashoffset:0}}
+        .ok-h{font-size:22px;font-weight:800;margin-bottom:6px}
+        .ok-p{font-size:14px;color:var(--text-2);line-height:1.55;margin-bottom:24px}
 
-        .promo {
-            display: flex; align-items: center; gap: 14px;
-            background: var(--orange-bg); border: 0.5px solid rgba(255,159,10,0.12);
-            border-radius: var(--r-md); padding: 14px 18px; margin-bottom: 28px;
+        .wa-box{
+            background:linear-gradient(135deg,#25D366 0%,#128C7E 100%);
+            border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px;
+            color:#fff;
         }
-        .promo-icon {
-            width: 38px; height: 38px; border-radius: var(--r-sm);
-            background: var(--orange); color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
+        .wa-box-title{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+        .wa-box-body{font-size:13px;opacity:0.9;line-height:1.5;margin-bottom:14px}
+        .btn-wa{
+            display:block;width:100%;padding:14px;border:none;
+            border-radius:12px;font-size:16px;font-weight:700;
+            font-family:inherit;cursor:pointer;
+            background:#fff;color:#128C7E;
+            transition:all .2s var(--ease);
         }
-        .promo-icon svg { width: 18px; height: 18px; }
-        .promo-text { font-size: 14px; font-weight: 500; line-height: 1.5; color: var(--text-1); }
-        .promo-text b { color: var(--orange); font-weight: 700; }
+        .btn-wa:hover{transform:scale(1.02);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+        .btn-wa:active{transform:scale(0.97)}
 
-        .field { margin-bottom: 18px; }
-        .field-lbl {
-            display: block; font-size: 13px; font-weight: 600;
-            color: var(--text-2); margin-bottom: 7px;
+        .discount-note{
+            background:var(--orange-bg);border:.5px solid rgba(255,159,10,0.12);
+            border-radius:12px;padding:12px 16px;margin-bottom:14px;
+            font-size:13px;color:var(--text-1);text-align:right;
         }
-        .field-in {
-            width: 100%; padding: 13px 16px;
-            background: var(--input-bg);
-            border: 1.5px solid transparent;
-            border-radius: var(--r-md);
-            font-size: 17px; font-weight: 400; font-family: inherit;
-            color: var(--text-1); outline: none;
-            transition: all 0.25s var(--ease);
-        }
-        .field-in::placeholder { color: var(--text-3); }
-        .field-in:focus {
-            background: var(--card);
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3.5px var(--accent-ring);
-        }
-        .field-in.ltr { direction: ltr; text-align: right; }
-        textarea.field-in { resize: none; min-height: 96px; line-height: 1.6; }
+        .discount-note b{color:#E08600}
 
-        .chip-lbl {
-            font-size: 13px; font-weight: 600;
-            color: var(--text-2); margin-bottom: 9px;
+        .btn-close-overlay{
+            background:none;border:none;color:var(--text-3);
+            font-size:14px;font-weight:500;font-family:inherit;
+            cursor:pointer;padding:8px;margin-top:4px;
         }
-        .chips { display: grid; gap: 9px; margin-bottom: 22px; }
-        .chips.c2 { grid-template-columns: 1fr 1fr; }
-        .chips.c3 { grid-template-columns: 1fr 1fr 1fr; }
-        .chip {
-            background: var(--input-bg); border: 1.5px solid transparent;
-            padding: 12px 10px; text-align: center; border-radius: var(--r-md);
-            font-size: 14px; font-weight: 500; color: var(--text-2);
-            cursor: pointer; user-select: none;
-            transition: all 0.2s var(--ease);
-            -webkit-tap-highlight-color: transparent;
-        }
-        .chip:hover { background: #EDEDF0; }
-        .chip.on {
-            background: var(--accent-bg);
-            border-color: var(--accent);
-            color: var(--accent); font-weight: 600;
-        }
-        .chip.wide { grid-column: 1 / -1; }
+        .btn-close-overlay:hover{color:var(--text-2)}
 
-        /* ── Success ── */
-        .ok-wrap {
-            width: 72px; height: 72px; border-radius: 50%;
-            background: var(--green-bg);
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 22px;
-        }
-        .ok-svg { width: 32px; height: 32px; }
-        .ok-svg path {
-            stroke: var(--green); stroke-width: 2.8;
-            stroke-linecap: round; stroke-linejoin: round;
-            fill: none; stroke-dasharray: 44; stroke-dashoffset: 44;
-            animation: draw 0.45s 0.15s var(--ease) forwards;
-        }
-        @keyframes draw { to { stroke-dashoffset: 0; } }
+        /* Inline validation */
+        .field-in.error{border-color:#FF453A;background:rgba(255,69,58,0.04)}
+        .field-error{font-size:12px;color:#FF453A;margin-top:4px;display:none}
+        .field-error.show{display:block}
+        .chip-group-error{font-size:12px;color:#FF453A;margin-top:-12px;margin-bottom:12px;display:none}
+        .chip-group-error.show{display:block}
 
-        .ok-h { font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 6px; }
-        .ok-p { font-size: 15px; color: var(--text-2); text-align: center; line-height: 1.55; margin-bottom: 28px; }
-
-        .note {
-            border-radius: var(--r-lg); padding: 18px 20px; margin-bottom: 14px;
-        }
-        .note-title {
-            font-size: 14px; font-weight: 700; margin-bottom: 4px;
-            display: flex; align-items: center; gap: 7px;
-        }
-        .note-title svg { width: 16px; height: 16px; flex-shrink: 0; }
-        .note-body { font-size: 14px; color: var(--text-2); line-height: 1.55; }
-        .note-body b { color: var(--text-1); }
-
-        .note--orange { background: var(--orange-bg); border: 0.5px solid rgba(255,159,10,0.12); }
-        .note--orange .note-title { color: var(--orange); }
-        .note--neutral { background: var(--card); box-shadow: var(--shadow); }
-        .note--neutral .note-title { color: var(--accent); }
-
-        /* ── Reduced Motion ── */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
+        @media(prefers-reduced-motion:reduce){
+            *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
         }
     </style>
 </head>
 <body>
 
-<!-- ═══════ INTRO ═══════ -->
-<div id="sIntro" class="screen">
-    <div class="screen-inner enter">
-        <div class="hero stagger" style="animation-delay:.05s">
-            <img src="logo.jpg" class="hero-img" alt="د. سعد صبري الزبيدي"
-                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
-            <h1 class="hero-name">د. سعد صبري الزبيدي</h1>
-            <p class="hero-sub">جراح عام متخصص بالجراحة العامة والمنظار والتجميل</p>
-        </div>
+<div class="page">
 
-        <div class="card stagger" style="animation-delay:.12s">
-            <div class="card-row">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                </div>
-                <div>
-                    <div class="card-lbl">العنوان</div>
-                    <div class="card-val">بغداد/حي الجامعة — شارع الإدارة والاقتصاد<br>عمارة مختبر الدوحة، الطابق الأول</div>
-                </div>
-            </div>
-            <div class="card-row">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                </div>
-                <div>
-                    <div class="card-lbl">الاتصال</div>
-                    <div class="card-val"><a href="https://wa.me/9647707684499" dir="ltr">0770 768 4499</a></div>
-                </div>
-            </div>
-            <div class="card-row">
-                <div class="card-icon orange">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                </div>
-                <div>
-                    <div class="card-lbl">أيام الاستقبال</div>
-                    <div class="card-val">الأربعاء، الخميس، السبت</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tags stagger" style="animation-delay:.2s">
-            <div class="tags-head">التخصصات</div>
-            <div class="tags-list">
-                <span class="tag">جراحة المنظار</span>
-                <span class="tag">تجميل البطن</span>
-                <span class="tag">الناسور الشرجي</span>
-                <span class="tag">الفتق</span>
-                <span class="tag">الكبد والمرارة</span>
-                <span class="tag">جراحات السمنة</span>
-                <span class="tag">الأورام</span>
-                <span class="tag">الغدة الدرقية</span>
-            </div>
-        </div>
-
-        <button class="btn btn-primary stagger" style="animation-delay:.28s" onclick="go('form')">حجز موعد</button>
-        <a class="btn btn-secondary stagger" style="animation-delay:.34s"
-           href="https://wa.me/9647707684499" target="_blank">تواصل عبر واتساب</a>
+    <!-- HERO -->
+    <div class="hero fade-up" style="animation-delay:.05s">
+        <img src="logo.jpg" class="hero-img" alt="د. سعد صبري الزبيدي"
+             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
+        <h1 class="hero-name">د. سعد صبري الزبيدي</h1>
+        <p class="hero-sub">استشاري الجراحة العامة والمنظار والتجميل</p>
     </div>
-</div>
 
-<!-- ═══════ FORM ═══════ -->
-<div id="sForm" class="screen off">
-    <div class="screen-inner">
-        <button class="back" onclick="go('intro')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-            رجوع
-        </button>
-
-        <h2 class="form-h">حجز موعد</h2>
-        <p class="form-p">أكمل البيانات التالية لحجز فحص في العيادة الجراحية</p>
-
-        <div class="promo">
-            <div class="promo-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-            </div>
-            <div class="promo-text">خصم الحجز الإلكتروني: أجور الفحص <b>20,000 د.ع</b> بدلاً من 25,000</div>
+    <!-- TRUST BAR -->
+    <div class="trust fade-up" style="animation-delay:.1s">
+        <div class="trust-item">
+            <div class="trust-icon blue">🏥</div>
+            <div><span class="trust-num">26+</span> سنة خبرة</div>
         </div>
+        <div class="trust-item">
+            <div class="trust-icon green">✅</div>
+            <div>جراح <span class="trust-num">متخصص</span></div>
+        </div>
+    </div>
+
+    <!-- SPECIALTIES — plain text, NOT clickable -->
+    <div class="specs fade-up" style="animation-delay:.14s">
+        جراحة المنظار <span class="spec-sep">•</span>
+        تجميل البطن <span class="spec-sep">•</span>
+        الفتق <span class="spec-sep">•</span>
+        المرارة <span class="spec-sep">•</span>
+        جراحات السمنة <span class="spec-sep">•</span>
+        الناسور <span class="spec-sep">•</span>
+        الأورام <span class="spec-sep">•</span>
+        الغدة الدرقية
+    </div>
+
+    <!-- DISCOUNT BANNER -->
+    <div class="discount fade-up" style="animation-delay:.18s">
+        <div class="discount-badge">%</div>
+        <div class="discount-text">
+            خصم الحجز الإلكتروني: الفحص <b>20,000 د.ع</b> بدلاً من <s>25,000</s>
+        </div>
+    </div>
+
+    <!-- BOOKING FORM — 3 fields only -->
+    <div class="form-section fade-up" style="animation-delay:.22s">
+        <h2 class="form-h">احجز موعدك الآن</h2>
+        <p class="form-p">ادخل بياناتك وسنتواصل معك لتأكيد الموعد</p>
 
         <div class="field">
-            <label class="field-lbl" for="ptName">الاسم الكامل</label>
-            <input class="field-in" type="text" id="ptName" placeholder="الاسم الثلاثي" required autocomplete="name">
-        </div>
-        <div class="field">
-            <label class="field-lbl" for="ptAge">العمر</label>
-            <input class="field-in" type="text" inputmode="numeric" id="ptAge" placeholder="أدخل عمرك" required
-                   oninput="this.value=this.value.replace(/[^0-9٠-٩]/g,'')">
+            <label class="field-lbl" for="ptName">الاسم</label>
+            <input class="field-in" type="text" id="ptName" placeholder="اسمك الكريم" required autocomplete="name">
+            <div class="field-error" id="errName">يرجى إدخال الاسم</div>
         </div>
         <div class="field">
             <label class="field-lbl" for="ptPhone">رقم الهاتف</label>
             <input class="field-in ltr" type="text" inputmode="tel" id="ptPhone" placeholder="07XX XXX XXXX" required autocomplete="tel"
                    oninput="this.value=this.value.replace(/[^0-9٠-٩+]/g,'')">
-        </div>
-        <div class="field">
-            <label class="field-lbl" for="ptSymptom">الأعراض أو التشخيص</label>
-            <textarea class="field-in" id="ptSymptom" placeholder="اكتب باختصار عن حالتك..." required></textarea>
+            <div class="field-error" id="errPhone">يرجى إدخال رقم الهاتف</div>
         </div>
 
-        <div class="chip-lbl">منذ متى تشعر بالأعراض؟</div>
-        <div class="chips c2" id="gDur">
-            <div class="chip" onclick="pick('gDur',this,'أقل من شهر')">أقل من شهر</div>
-            <div class="chip" onclick="pick('gDur',this,'شهر وأكثر')">شهر وأكثر</div>
-            <div class="chip" onclick="pick('gDur',this,'٣ أشهر وأكثر')">٣ أشهر وأكثر</div>
-            <div class="chip" onclick="pick('gDur',this,'٦ أشهر وأكثر')">٦ أشهر وأكثر</div>
-            <div class="chip wide" onclick="pick('gDur',this,'سنة وأكثر')">سنة وأكثر</div>
+        <div class="chip-lbl">اختر اليوم المفضل</div>
+        <div class="chips" id="gDay">
+            <div class="chip" onclick="pick(this,'الأربعاء')">الأربعاء</div>
+            <div class="chip" onclick="pick(this,'الخميس')">الخميس</div>
+            <div class="chip" onclick="pick(this,'السبت')">السبت</div>
         </div>
-        <input type="hidden" id="ptDur" value="">
-
-        <div class="chip-lbl">اليوم المفضل للمراجعة</div>
-        <div class="chips c3" id="gDay">
-            <div class="chip" onclick="pick('gDay',this,'الأربعاء')">الأربعاء</div>
-            <div class="chip" onclick="pick('gDay',this,'الخميس')">الخميس</div>
-            <div class="chip" onclick="pick('gDay',this,'السبت')">السبت</div>
-        </div>
+        <div class="chip-group-error" id="errDay">يرجى اختيار يوم</div>
         <input type="hidden" id="ptDay" value="">
 
-        <button class="btn btn-primary" id="submitBtn" onclick="submit()" style="margin-top:6px">إرسال طلب الحجز</button>
+        <button class="btn-submit" id="submitBtn" onclick="submit()">📅 احجز موعدك — </button>
     </div>
+
+    <!-- CLINIC INFO -->
+    <div class="info-card fade-up" style="animation-delay:.28s">
+        <div class="info-row">
+            <div class="info-icon blue">📍</div>
+            <div>
+                <div class="info-lbl">العنوان</div>
+                <div class="info-val">بغداد / حي الجامعة — شارع الإدارة والاقتصاد<br>عمارة مختبر الدوحة، الطابق الأول</div>
+            </div>
+        </div>
+        <div class="info-row">
+            <div class="info-icon blue">📞</div>
+            <div>
+                <div class="info-lbl">الاتصال</div>
+                <div class="info-val"><a href="https://wa.me/9647707684499" dir="ltr">0770 768 4499</a></div>
+            </div>
+        </div>
+        <div class="info-row">
+            <div class="info-icon org">📅</div>
+            <div>
+                <div class="info-lbl">أيام الاستقبال</div>
+                <div class="info-val">الأربعاء، الخميس، السبت</div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<!-- ═══════ SUCCESS ═══════ -->
-<div id="sOk" class="screen off">
-    <div class="screen-inner" style="padding-top:110px">
-        <div class="ok-wrap">
+<!-- SUCCESS OVERLAY -->
+<div class="overlay" id="successOverlay">
+    <div class="success-card">
+        <div class="ok-circle">
             <svg class="ok-svg" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
         </div>
-        <h2 class="ok-h">تم استلام طلبك</h2>
-        <p class="ok-p">سيتم مراجعة بياناتك والرد عليك لتأكيد الموعد</p>
+        <h2 class="ok-h">تم تسجيل حجزك ✓</h2>
+        <p class="ok-p">خطوة أخيرة — أرسل تأكيد عبر واتساب ليتم اعتماد موعدك</p>
 
-        <div class="note note--orange">
-            <div class="note-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-                خصم الحجز الإلكتروني
+        <div class="wa-box">
+            <div class="wa-box-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.359 0-4.543-.815-6.262-2.18l-.438-.362-3.3 1.106 1.106-3.3-.362-.438A9.955 9.955 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                تأكيد عبر واتساب
             </div>
-            <div class="note-body">أجور الفحص: <b>20,000 د.ع</b></div>
+            <div class="wa-box-body">رسالة جاهزة ستُرسل تلقائياً — فقط اضغط الزر</div>
+            <button class="btn-wa" onclick="waConfirm()">إرسال تأكيد الحجز ←</button>
         </div>
 
-        <div class="note note--neutral">
-            <div class="note-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                خطوة أخيرة
-            </div>
-            <div class="note-body">اضغط الزر أدناه لإرسال رسالة تأكيد إلى العيادة عبر الواتساب حتى يتم اعتماد حجزك</div>
-        </div>
+        <div class="discount-note">🏷️ أجور الفحص بالخصم: <b>20,000 د.ع</b></div>
 
-        <button class="btn btn-green" onclick="waConfirm()">تأكيد الحجز عبر الواتساب</button>
+        <button class="btn-close-overlay" onclick="document.getElementById('successOverlay').classList.remove('show')">إغلاق</button>
     </div>
 </div>
 
@@ -450,96 +383,81 @@ firebase.initializeApp({
 const db = firebase.database();
 const VAULT = "https://script.google.com/macros/s/AKfycbyJ6VCB9wXgMP-txhLSANSbSfyjBO75rOCYxwL2uzmeZdq14gUM4fNh2Rg3d6SVo34/exec";
 
-/* ── Navigation ── */
-const map = { intro:'sIntro', form:'sForm', ok:'sOk' };
-let busy = false;
+function norm(s){return s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))}
 
-function go(to) {
-    if (busy) return;
-    busy = true;
-    const cur = document.querySelector('.screen:not(.off)');
-    const nxt = document.getElementById(map[to]);
-    if (cur === nxt) { busy = false; return; }
-
-    cur.querySelector('.screen-inner').classList.add('exit');
-    setTimeout(() => {
-        cur.classList.add('off');
-        cur.querySelector('.screen-inner').classList.remove('exit');
-        nxt.classList.remove('off');
-        nxt.querySelector('.screen-inner').classList.add('enter');
-        window.scrollTo({ top: 0 });
-        setTimeout(() => {
-            nxt.querySelector('.screen-inner').classList.remove('enter');
-            busy = false;
-        }, 500);
-    }, 320);
-}
-
-/* ── Chips ── */
-function pick(gid, el, val) {
-    document.querySelectorAll('#' + gid + ' .chip').forEach(c => c.classList.remove('on'));
+/* Day Chips */
+function pick(el,val){
+    document.querySelectorAll('#gDay .chip').forEach(c=>c.classList.remove('on'));
     el.classList.add('on');
-    if (gid === 'gDur') document.getElementById('ptDur').value = val;
-    if (gid === 'gDay') document.getElementById('ptDay').value = val;
+    document.getElementById('ptDay').value=val;
+    document.getElementById('errDay').classList.remove('show');
 }
 
-/* ── Helpers ── */
-function norm(s) { return s.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)); }
+/* Inline Validation */
+function validate(){
+    let ok=true;
+    const n=document.getElementById('ptName');
+    const p=document.getElementById('ptPhone');
+    const d=document.getElementById('ptDay').value;
 
-/* ── Submit ── */
-function submit() {
-    const n = document.getElementById('ptName').value.trim();
-    const a = document.getElementById('ptAge').value.trim();
-    const p = document.getElementById('ptPhone').value.trim();
-    const s = document.getElementById('ptSymptom').value.trim();
-    const d = document.getElementById('ptDur').value;
-    const y = document.getElementById('ptDay').value;
+    // reset
+    n.classList.remove('error');p.classList.remove('error');
+    document.getElementById('errName').classList.remove('show');
+    document.getElementById('errPhone').classList.remove('show');
+    document.getElementById('errDay').classList.remove('show');
 
-    if (!n || !a || !p || !s || !d || !y) {
-        alert('يرجى ملء جميع الحقول واختيار المدة واليوم');
-        return;
-    }
+    if(!n.value.trim()){n.classList.add('error');document.getElementById('errName').classList.add('show');ok=false}
+    if(!p.value.trim()||p.value.trim().length<10){p.classList.add('error');document.getElementById('errPhone').classList.add('show');ok=false}
+    if(!d){document.getElementById('errDay').classList.add('show');ok=false}
+    return ok;
+}
 
-    const btn = document.getElementById('submitBtn');
-    btn.textContent = 'جاري الإرسال...';
-    btn.disabled = true;
+/* Submit */
+function submit(){
+    if(!validate())return;
 
-    const data = {
-        name: n,
-        age: norm(a),
-        phone: norm(p),
-        symptom: s,
-        duration: d + ' | ' + y,
-        timestamp: new Date().toISOString(),
-        status: 'pending',
-        discount: '20,000 د.ع'
+    const n=document.getElementById('ptName').value.trim();
+    const p=document.getElementById('ptPhone').value.trim();
+    const y=document.getElementById('ptDay').value;
+
+    const btn=document.getElementById('submitBtn');
+    btn.textContent='جاري الحجز...';
+    btn.disabled=true;
+
+    const data={
+        name:n,
+        phone:norm(p),
+        preferredDay:y,
+        timestamp:new Date().toISOString(),
+        status:'pending',
+        discount:'20,000 د.ع',
+        source:'booking-v2'
     };
 
     db.ref('pendingBookings').push(data)
-        .then(() => {
-            fbq('track', 'Lead', { currency: 'IQD', value: 20000 });
-
-            fetch(VAULT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) })
-                .catch(() => {});
-
-            go('ok');
+        .then(()=>{
+            fbq('track','Lead',{currency:'IQD',value:20000});
+            fetch(VAULT,{method:'POST',mode:'no-cors',body:JSON.stringify(data)}).catch(()=>{});
+            document.getElementById('successOverlay').classList.add('show');
+            btn.textContent='📅 احجز موعدك — مجاناً';
+            btn.disabled=false;
         })
-        .catch(() => {
+        .catch(()=>{
             alert('حدث خطأ في الشبكة، يرجى المحاولة مرة أخرى');
-            btn.textContent = 'إرسال طلب الحجز';
-            btn.disabled = false;
+            btn.textContent='📅 احجز موعدك — مجاناً';
+            btn.disabled=false;
         });
 }
 
-/* ── WhatsApp ── */
-function waConfirm() {
-    const n = document.getElementById('ptName').value.trim();
-    const y = document.getElementById('ptDay').value;
-    const t = encodeURIComponent(
-        'مرحباً عيادة د. سعد صبري،\nقمت بتسجيل حجز إلكتروني باسم (' + n + ') ليوم (' + y + ').\nأرجو تأكيد الموعد — مشمول بخصم الحجز الإلكتروني (20,000 د.ع).'
+/* WhatsApp Confirm */
+function waConfirm(){
+    const n=document.getElementById('ptName').value.trim();
+    const y=document.getElementById('ptDay').value;
+    const t=encodeURIComponent(
+        'مرحباً عيادة د. سعد صبري،\nقمت بتسجيل حجز إلكتروني باسم ('+n+') ليوم ('+y+').\nأرجو تأكيد الموعد — مشمول بخصم الحجز الإلكتروني (20,000 د.ع).'
     );
-    fbq('trackCustom', 'WhatsAppContact');
-    window.open('https://wa.me/9647707684499?text=' + t, '_blank');
+    fbq('trackCustom','WhatsAppContact');
+    window.open('https://wa.me/9647707684499?text='+t,'_blank');
 }
 </script>
 </body>
