@@ -486,7 +486,7 @@ function submit(){
         preferredDay:y,
         timestamp:new Date().toISOString(),
         status:'pending',
-        source:'booking-v3'
+        source:'booking-v2'
     };
 
     db.ref('pendingBookings').push(data)
