@@ -1,463 +1,245 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>د. سعد صبري الزبيدي | حجز استشارة</title>
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1270959085105678');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1270959085105678&ev=PageView&noscript=1"/></noscript>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        :root{
-            --bg:#F5F5F7;--card:#FFFFFF;--text-1:#1D1D1F;--text-2:#6E6E73;--text-3:#AEAEB2;
-            --accent:#0071E3;--accent-hover:#0077ED;--accent-bg:rgba(0,113,227,0.06);
-            --accent-ring:rgba(0,113,227,0.24);--green:#30D158;--green-dark:#28B84D;
-            --green-bg:rgba(48,209,88,0.08);--orange:#FF9F0A;--orange-bg:rgba(255,159,10,0.07);
-            --sep:rgba(60,60,67,0.06);--input-bg:#F5F5F7;
-            --r-sm:10px;--r-md:14px;--r-lg:20px;
-            --shadow:0 0.5px 0 0 rgba(0,0,0,0.04),0 2px 8px rgba(0,0,0,0.04);
-            --ease:cubic-bezier(0.25,0.1,0.25,1);
-        }
-        body{
-            font-family:'Tajawal',-apple-system,BlinkMacSystemFont,sans-serif;
-            background:var(--bg);color:var(--text-1);min-height:100vh;
-            -webkit-font-smoothing:antialiased;overflow-x:hidden;
-        }
-        .page{max-width:460px;width:100%;margin:0 auto;padding:48px 20px 60px}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>د. سعد صبري الزبيدي | حجز استشارة</title>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1270959085105678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1270959085105678&ev=PageView&noscript=1"/></noscript>
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0F1B2D;--ink2:#4A5568;--bg:#F3F7FA;--card:#fff;
+  --teal:#0A8F8A;--teal-d:#067672;--navy:#12306B;--green:#1FA855;--green-d:#178A45;
+  --ring:rgba(10,143,138,.25);--r:20px;--ease:cubic-bezier(.25,.1,.25,1);
+}
+html{font-size:18px}
+body{font-family:'Tajawal',-apple-system,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+/* soft animated glow behind the page */
+body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(80px);opacity:.45;animation:float 14s ease-in-out infinite alternate}
+body::before{width:340px;height:340px;background:#8FE3DC;top:-80px;right:-100px}
+body::after{width:300px;height:300px;background:#A9C4FF;bottom:-80px;left:-100px;animation-delay:-6s}
+@keyframes float{to{transform:translate(30px,40px) scale(1.15)}}
+.page{max-width:480px;margin:0 auto;padding:28px 18px 56px}
+.up{opacity:0;transform:translateY(18px);animation:up .6s var(--ease) forwards}
+@keyframes up{to{opacity:1;transform:none}}
 
-        /* Animations */
-        .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .55s var(--ease) forwards}
-        @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+/* HERO */
+.hero{text-align:center;margin-bottom:22px}
+.avatar{position:relative;width:128px;height:128px;margin:0 auto 14px}
+.avatar::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,var(--teal),#6C8CFF,var(--teal));animation:spin 8s linear infinite}
+.avatar img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+.name{font-size:2rem;font-weight:800;color:var(--navy);line-height:1.25}
+.title{font-size:1.05rem;color:var(--ink2);margin-top:4px}
+.stats{display:flex;justify-content:center;gap:12px;margin-top:18px}
+.stat{background:rgba(255,255,255,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid #fff;border-radius:16px;padding:10px 20px;box-shadow:0 4px 16px rgba(18,48,107,.06)}
+.stat b{display:block;font-size:1.6rem;font-weight:800;color:var(--teal)}
+.stat span{font-size:.85rem;color:var(--ink2);font-weight:500}
 
-        /* Hero */
-        .hero{text-align:center;margin-bottom:28px}
-        .hero-img{
-            width:96px;height:96px;border-radius:50%;object-fit:cover;
-            margin-bottom:14px;box-shadow:0 4px 20px rgba(0,0,0,0.08);
-            border:3px solid #fff;
-        }
-        .hero-name{font-size:28px;font-weight:800;letter-spacing:-0.4px;margin-bottom:2px}
-        .hero-sub{font-size:15px;color:var(--text-2);line-height:1.5;margin-bottom:16px}
+/* BIG CALL BUTTONS for easy access */
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.qbtn{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 8px;border-radius:16px;font-weight:700;font-size:1.05rem;text-decoration:none;font-family:inherit;transition:transform .15s}
+.qbtn:active{transform:scale(.97)}
+.qcall{background:var(--navy);color:#fff}
+.qwa{background:#fff;color:var(--green-d);border:2px solid var(--green)}
 
-        /* Trust Bar */
-        .trust{
-            display:flex;justify-content:center;gap:24px;
-            margin-bottom:8px;
-        }
-        .trust-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text-2)}
-        .trust-icon{
-            width:28px;height:28px;border-radius:8px;
-            display:flex;align-items:center;justify-content:center;
-            font-size:14px;
-        }
-        .trust-icon.blue{background:var(--accent-bg);color:var(--accent)}
-        .trust-icon.green{background:var(--green-bg);color:var(--green)}
-        .trust-num{font-weight:800;color:var(--text-1);font-size:15px}
+/* SPECIALTIES */
+.specs{background:rgba(255,255,255,.7);border-radius:var(--r);padding:16px 18px;text-align:center;font-size:1rem;color:var(--ink2);line-height:2;margin-bottom:22px}
+.specs i{font-style:normal;color:var(--teal);margin:0 6px}
 
-        /* Specialties - plain text, NOT clickable */
-        .specs{
-            text-align:center;font-size:13px;color:var(--text-3);
-            line-height:1.8;margin-bottom:28px;
-        }
-        .specs span{
-            display:inline;
-            /* No background, no border, no hover — pure text */
-        }
-        .spec-sep{margin:0 2px;color:var(--text-3);opacity:0.5}
+/* FORM */
+.form{background:var(--card);border-radius:28px;padding:26px 20px;box-shadow:0 14px 40px rgba(18,48,107,.1);margin-bottom:22px}
+.form h2{font-size:1.5rem;font-weight:800;color:var(--navy)}
+.form .sub{color:var(--ink2);font-size:1rem;margin-bottom:22px}
+.step{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.step em{font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.9rem}
+.field{margin-bottom:20px}
+.in{width:100%;padding:16px;font-size:1.15rem;font-family:inherit;background:#F3F7FA;border:2px solid #E2E8F0;border-radius:16px;outline:none;color:var(--ink);transition:.2s var(--ease)}
+.in:focus{background:#fff;border-color:var(--teal);box-shadow:0 0 0 4px var(--ring)}
+.in.ltr{direction:ltr;text-align:right}
+.in.error{border-color:#E53E3E;background:#FFF5F5}
+.err{display:none;color:#C53030;font-size:.95rem;font-weight:500;margin-top:6px}
+.err.show{display:block}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.chip{padding:18px 6px;text-align:center;border-radius:16px;background:#F3F7FA;border:2px solid #E2E8F0;font-size:1.1rem;font-weight:700;color:var(--ink2);cursor:pointer;user-select:none;transition:.2s var(--ease);-webkit-tap-highlight-color:transparent}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px var(--ring)}
+.chip.on::before{content:"✓ "}
+.go{display:block;width:100%;margin-top:24px;padding:19px;border:none;border-radius:18px;font-size:1.25rem;font-weight:800;font-family:inherit;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--green),#12B886);box-shadow:0 10px 26px rgba(31,168,85,.35);transition:.2s var(--ease)}
+.go:active{transform:scale(.97)}
+.go:disabled{opacity:.5}
+.safe{text-align:center;color:var(--ink2);font-size:.9rem;margin-top:12px}
 
-        /* Discount Banner */
-        .discount{
-            background:linear-gradient(135deg,rgba(255,159,10,0.1) 0%,rgba(255,159,10,0.04) 100%);
-            border:1px solid rgba(255,159,10,0.15);
-            border-radius:var(--r-lg);padding:18px 20px;margin-bottom:32px;
-            display:flex;align-items:center;gap:14px;
-        }
-        .discount-badge{
-            width:44px;height:44px;border-radius:12px;
-            background:linear-gradient(135deg,#FF9F0A,#FFB340);color:#fff;
-            display:flex;align-items:center;justify-content:center;flex-shrink:0;
-            font-size:20px;font-weight:800;
-        }
-        .discount-text{font-size:15px;font-weight:500;line-height:1.6;color:var(--text-1)}
-        .discount-text b{color:#E08600;font-weight:700}
-        .discount-text s{color:var(--text-3);font-weight:400}
+/* INFO */
+.info{background:#fff;border-radius:var(--r);box-shadow:0 4px 16px rgba(18,48,107,.06);overflow:hidden}
+.row{display:flex;gap:14px;padding:16px 18px;align-items:flex-start}
+.row+.row{border-top:1px solid #EDF2F7}
+.ico{font-size:1.4rem;flex-shrink:0}
+.lbl{font-size:.85rem;color:var(--ink2);font-weight:500}
+.val{font-size:1.05rem;font-weight:700}
+.val a{color:var(--navy);text-decoration:none}
 
-        /* Form Section */
-        .form-section{
-            background:var(--card);border-radius:var(--r-lg);
-            box-shadow:var(--shadow);padding:28px 22px;margin-bottom:24px;
-        }
-        .form-h{font-size:20px;font-weight:800;margin-bottom:4px}
-        .form-p{font-size:14px;color:var(--text-2);margin-bottom:24px;line-height:1.5}
-
-        .field{margin-bottom:16px}
-        .field-lbl{display:block;font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:6px}
-        .field-in{
-            width:100%;padding:14px 16px;background:var(--input-bg);
-            border:1.5px solid transparent;border-radius:var(--r-md);
-            font-size:17px;font-weight:400;font-family:inherit;
-            color:var(--text-1);outline:none;transition:all .25s var(--ease);
-        }
-        .field-in::placeholder{color:var(--text-3)}
-        .field-in:focus{
-            background:var(--card);border-color:var(--accent);
-            box-shadow:0 0 0 3.5px var(--accent-ring);
-        }
-        .field-in.ltr{direction:ltr;text-align:right}
-
-        /* Day chips */
-        .chip-lbl{font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:8px}
-        .chips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
-        .chip{
-            background:var(--input-bg);border:1.5px solid transparent;
-            padding:13px 10px;text-align:center;border-radius:var(--r-md);
-            font-size:15px;font-weight:500;color:var(--text-2);
-            cursor:pointer;user-select:none;transition:all .2s var(--ease);
-            -webkit-tap-highlight-color:transparent;
-        }
-        .chip:hover{background:#EDEDF0}
-        .chip.on{
-            background:var(--accent-bg);border-color:var(--accent);
-            color:var(--accent);font-weight:600;
-        }
-
-        /* Submit Button */
-        .btn-submit{
-            display:block;width:100%;border:none;
-            padding:16px 24px;border-radius:var(--r-md);
-            font-size:17px;font-weight:700;font-family:inherit;
-            cursor:pointer;transition:all .2s var(--ease);
-            text-align:center;background:var(--green);color:#fff;
-        }
-        .btn-submit:hover{background:var(--green-dark)}
-        .btn-submit:active{transform:scale(0.975)}
-        .btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none}
-
-        /* Clinic Info Card */
-        .info-card{
-            background:var(--card);border-radius:var(--r-lg);
-            box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;
-        }
-        .info-row{
-            display:flex;align-items:flex-start;gap:14px;padding:14px 20px;
-        }
-        .info-row+.info-row{border-top:.5px solid var(--sep)}
-        .info-icon{
-            width:32px;height:32px;border-radius:var(--r-sm);
-            display:flex;align-items:center;justify-content:center;
-            flex-shrink:0;font-size:15px;
-        }
-        .info-icon.blue{color:var(--accent);background:var(--accent-bg)}
-        .info-icon.org{color:var(--orange);background:var(--orange-bg)}
-        .info-lbl{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px}
-        .info-val{font-size:14px;font-weight:500;color:var(--text-1);line-height:1.45}
-        .info-val a{color:var(--accent);text-decoration:none}
-
-        /* Success Overlay */
-        .overlay{
-            position:fixed;inset:0;background:rgba(0,0,0,0.4);
-            backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-            z-index:1000;display:none;align-items:center;justify-content:center;
-            padding:20px;
-        }
-        .overlay.show{display:flex}
-        .success-card{
-            background:var(--card);border-radius:24px;padding:36px 28px;
-            max-width:400px;width:100%;text-align:center;
-            box-shadow:0 20px 60px rgba(0,0,0,0.15);
-            animation:popIn .4s cubic-bezier(0.34,1.56,0.64,1) both;
-        }
-        @keyframes popIn{
-            from{opacity:0;transform:scale(0.9) translateY(20px)}
-            to{opacity:1;transform:scale(1) translateY(0)}
-        }
-        .ok-circle{
-            width:72px;height:72px;border-radius:50%;background:var(--green-bg);
-            display:flex;align-items:center;justify-content:center;
-            margin:0 auto 18px;
-        }
-        .ok-svg{width:32px;height:32px}
-        .ok-svg path{
-            stroke:var(--green);stroke-width:2.8;stroke-linecap:round;
-            stroke-linejoin:round;fill:none;
-            stroke-dasharray:44;stroke-dashoffset:44;
-            animation:draw .45s .15s var(--ease) forwards;
-        }
-        @keyframes draw{to{stroke-dashoffset:0}}
-        .ok-h{font-size:22px;font-weight:800;margin-bottom:6px}
-        .ok-p{font-size:14px;color:var(--text-2);line-height:1.55;margin-bottom:24px}
-
-        .wa-box{
-            background:linear-gradient(135deg,#25D366 0%,#128C7E 100%);
-            border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px;
-            color:#fff;
-        }
-        .wa-box-title{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-        .wa-box-body{font-size:13px;opacity:0.9;line-height:1.5;margin-bottom:14px}
-        .btn-wa{
-            display:block;width:100%;padding:14px;border:none;
-            border-radius:12px;font-size:16px;font-weight:700;
-            font-family:inherit;cursor:pointer;
-            background:#fff;color:#128C7E;
-            transition:all .2s var(--ease);
-        }
-        .btn-wa:hover{transform:scale(1.02);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
-        .btn-wa:active{transform:scale(0.97)}
-
-        .discount-note{
-            background:var(--orange-bg);border:.5px solid rgba(255,159,10,0.12);
-            border-radius:12px;padding:12px 16px;margin-bottom:14px;
-            font-size:13px;color:var(--text-1);text-align:right;
-        }
-        .discount-note b{color:#E08600}
-
-        .btn-close-overlay{
-            background:none;border:none;color:var(--text-3);
-            font-size:14px;font-weight:500;font-family:inherit;
-            cursor:pointer;padding:8px;margin-top:4px;
-        }
-        .btn-close-overlay:hover{color:var(--text-2)}
-
-        /* Inline validation */
-        .field-in.error{border-color:#FF453A;background:rgba(255,69,58,0.04)}
-        .field-error{font-size:12px;color:#FF453A;margin-top:4px;display:none}
-        .field-error.show{display:block}
-        .chip-group-error{font-size:12px;color:#FF453A;margin-top:-12px;margin-bottom:12px;display:none}
-        .chip-group-error.show{display:block}
-
-        @media(prefers-reduced-motion:reduce){
-            *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-        }
-    </style>
+/* SUCCESS */
+.overlay{position:fixed;inset:0;background:rgba(15,27,45,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
+.overlay.show{display:flex}
+.ok{background:#fff;border-radius:28px;padding:32px 24px;max-width:400px;width:100%;text-align:center;animation:pop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.9) translateY(20px)}}
+.ok-c{width:76px;height:76px;border-radius:50%;background:rgba(31,168,85,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.ok-c svg{width:36px;height:36px}
+.ok-c path{stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:44;stroke-dashoffset:44;animation:draw .5s .15s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.ok h2{font-size:1.5rem;font-weight:800;margin-bottom:6px}
+.ok p{color:var(--ink2);margin-bottom:20px}
+.wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:18px;border:none;border-radius:16px;font-size:1.2rem;font-weight:800;font-family:inherit;color:#fff;background:#25D366;cursor:pointer;box-shadow:0 10px 24px rgba(37,211,102,.35)}
+.close{background:none;border:none;color:var(--ink2);font-size:1rem;font-family:inherit;margin-top:14px;padding:8px;cursor:pointer}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
-
 <div class="page">
 
-    <!-- HERO -->
-    <div class="hero fade-up" style="animation-delay:.05s">
-        <img src="logo.jpg" class="hero-img" alt="د. سعد صبري الزبيدي"
-             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
-        <h1 class="hero-name">د. سعد صبري الزبيدي</h1>
-        <p class="hero-sub">استشاري الجراحة العامة والمنظار والتجميل</p>
+  <div class="hero up">
+    <div class="avatar"><img src="logo.jpg" alt="د. سعد صبري الزبيدي" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'"></div>
+    <h1 class="name">د. سعد صبري الزبيدي</h1>
+    <p class="title">استشاري الجراحة العامة والمنظار والتجميل</p>
+    <div class="stats">
+      <div class="stat"><b>26+</b><span>سنة خبرة</span></div>
+      <div class="stat"><b>جراح</b><span>متخصص</span></div>
+    </div>
+  </div>
+
+  <div class="quick up" style="animation-delay:.1s">
+    <a class="qbtn qcall" href="tel:+9647707684499">📞 اتصل الآن</a>
+    <a class="qbtn qwa" href="https://wa.me/9647707684499" target="_blank" rel="noopener">💬 واتساب</a>
+  </div>
+
+  <div class="specs up" style="animation-delay:.14s">
+    جراحة المنظار<i>•</i>تجميل البطن<i>•</i>الفتق<i>•</i>المرارة<i>•</i>جراحات السمنة<i>•</i>الناسور<i>•</i>الأورام<i>•</i>الغدة الدرقية
+  </div>
+
+  <div class="form up" style="animation-delay:.2s" id="book">
+    <h2>احجز موعدك بثلاث خطوات</h2>
+    <p class="sub">وسنتصل بك لتأكيد الموعد</p>
+
+    <div class="field">
+      <div class="step"><em>1</em><label for="ptName">اسمك</label></div>
+      <input class="in" type="text" id="ptName" placeholder="اكتب اسمك الكريم" autocomplete="name">
+      <div class="err" id="errName">يرجى كتابة الاسم</div>
     </div>
 
-    <!-- TRUST BAR -->
-    <div class="trust fade-up" style="animation-delay:.1s">
-        <div class="trust-item">
-            <div class="trust-icon blue">🏥</div>
-            <div><span class="trust-num">26+</span> سنة خبرة</div>
-        </div>
-        <div class="trust-item">
-            <div class="trust-icon green">✅</div>
-            <div>جراح <span class="trust-num">متخصص</span></div>
-        </div>
+    <div class="field">
+      <div class="step"><em>2</em><label for="ptPhone">رقم هاتفك</label></div>
+      <input class="in ltr" type="text" inputmode="tel" id="ptPhone" placeholder="07XX XXX XXXX" autocomplete="tel" oninput="this.value=this.value.replace(/[^0-9٠-٩+]/g,'')">
+      <div class="err" id="errPhone">يرجى كتابة رقم الهاتف كاملاً</div>
     </div>
 
-    <!-- SPECIALTIES — plain text, NOT clickable -->
-    <div class="specs fade-up" style="animation-delay:.14s">
-        جراحة المنظار <span class="spec-sep">•</span>
-        تجميل البطن <span class="spec-sep">•</span>
-        الفتق <span class="spec-sep">•</span>
-        المرارة <span class="spec-sep">•</span>
-        جراحات السمنة <span class="spec-sep">•</span>
-        الناسور <span class="spec-sep">•</span>
-        الأورام <span class="spec-sep">•</span>
-        الغدة الدرقية
+    <div class="field" style="margin-bottom:0">
+      <div class="step"><em>3</em><span>اختر اليوم المناسب</span></div>
+      <div class="chips" id="gDay">
+        <div class="chip" onclick="pick(this,'الأربعاء')">الأربعاء</div>
+        <div class="chip" onclick="pick(this,'الخميس')">الخميس</div>
+        <div class="chip" onclick="pick(this,'السبت')">السبت</div>
+      </div>
+      <div class="err" id="errDay">يرجى اختيار يوم</div>
+      <input type="hidden" id="ptDay" value="">
     </div>
 
-    <!-- DISCOUNT BANNER -->
-    <div class="discount fade-up" style="animation-delay:.18s">
-        <div class="discount-badge">%</div>
-        <div class="discount-text">
-            خصم الحجز الإلكتروني: الفحص <b>20,000 د.ع</b> بدلاً من <s>25,000</s>
-        </div>
-    </div>
+    <button class="go" id="submitBtn" onclick="submit()">📅 تأكيد الحجز</button>
+    <p class="safe">🔒 معلوماتك سرية ولن تُشارك مع أحد</p>
+  </div>
 
-    <!-- BOOKING FORM — 3 fields only -->
-    <div class="form-section fade-up" style="animation-delay:.22s">
-        <h2 class="form-h">احجز موعدك الآن</h2>
-        <p class="form-p">ادخل بياناتك وسنتواصل معك لتأكيد الموعد</p>
-
-        <div class="field">
-            <label class="field-lbl" for="ptName">الاسم</label>
-            <input class="field-in" type="text" id="ptName" placeholder="اسمك الكريم" required autocomplete="name">
-            <div class="field-error" id="errName">يرجى إدخال الاسم</div>
-        </div>
-        <div class="field">
-            <label class="field-lbl" for="ptPhone">رقم الهاتف</label>
-            <input class="field-in ltr" type="text" inputmode="tel" id="ptPhone" placeholder="07XX XXX XXXX" required autocomplete="tel"
-                   oninput="this.value=this.value.replace(/[^0-9٠-٩+]/g,'')">
-            <div class="field-error" id="errPhone">يرجى إدخال رقم الهاتف</div>
-        </div>
-
-        <div class="chip-lbl">اختر اليوم المفضل</div>
-        <div class="chips" id="gDay">
-            <div class="chip" onclick="pick(this,'الأربعاء')">الأربعاء</div>
-            <div class="chip" onclick="pick(this,'الخميس')">الخميس</div>
-            <div class="chip" onclick="pick(this,'السبت')">السبت</div>
-        </div>
-        <div class="chip-group-error" id="errDay">يرجى اختيار يوم</div>
-        <input type="hidden" id="ptDay" value="">
-
-        <button class="btn-submit" id="submitBtn" onclick="submit()">📅 احجز موعدك — </button>
-    </div>
-
-    <!-- CLINIC INFO -->
-    <div class="info-card fade-up" style="animation-delay:.28s">
-        <div class="info-row">
-            <div class="info-icon blue">📍</div>
-            <div>
-                <div class="info-lbl">العنوان</div>
-                <div class="info-val">بغداد / حي الجامعة — شارع الإدارة والاقتصاد<br>عمارة مختبر الدوحة، الطابق الأول</div>
-            </div>
-        </div>
-        <div class="info-row">
-            <div class="info-icon blue">📞</div>
-            <div>
-                <div class="info-lbl">الاتصال</div>
-                <div class="info-val"><a href="https://wa.me/9647707684499" dir="ltr">0770 768 4499</a></div>
-            </div>
-        </div>
-        <div class="info-row">
-            <div class="info-icon org">📅</div>
-            <div>
-                <div class="info-lbl">أيام الاستقبال</div>
-                <div class="info-val">الأربعاء، الخميس، السبت</div>
-            </div>
-        </div>
-    </div>
-
+  <div class="info up" style="animation-delay:.28s">
+    <div class="row"><div class="ico">📍</div><div><div class="lbl">العنوان</div><div class="val">بغداد / حي الجامعة — شارع الإدارة والاقتصاد<br>عمارة مختبر الدوحة، الطابق الأول</div></div></div>
+    <div class="row"><div class="ico">📞</div><div><div class="lbl">للاتصال</div><div class="val"><a href="tel:+9647707684499" dir="ltr">0770 768 4499</a></div></div></div>
+    <div class="row"><div class="ico">🗓️</div><div><div class="lbl">أيام الاستقبال</div><div class="val">الأربعاء، الخميس، السبت</div></div></div>
+  </div>
 </div>
 
-<!-- SUCCESS OVERLAY -->
 <div class="overlay" id="successOverlay">
-    <div class="success-card">
-        <div class="ok-circle">
-            <svg class="ok-svg" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-        </div>
-        <h2 class="ok-h">تم تسجيل حجزك ✓</h2>
-        <p class="ok-p">خطوة أخيرة — أرسل تأكيد عبر واتساب ليتم اعتماد موعدك</p>
-
-        <div class="wa-box">
-            <div class="wa-box-title">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.359 0-4.543-.815-6.262-2.18l-.438-.362-3.3 1.106 1.106-3.3-.362-.438A9.955 9.955 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-                تأكيد عبر واتساب
-            </div>
-            <div class="wa-box-body">رسالة جاهزة ستُرسل تلقائياً — فقط اضغط الزر</div>
-            <button class="btn-wa" onclick="waConfirm()">إرسال تأكيد الحجز ←</button>
-        </div>
-
-        <div class="discount-note">🏷️ أجور الفحص بالخصم: <b>20,000 د.ع</b></div>
-
-        <button class="btn-close-overlay" onclick="document.getElementById('successOverlay').classList.remove('show')">إغلاق</button>
-    </div>
+  <div class="ok">
+    <div class="ok-c"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+    <h2>تم تسجيل حجزك ✓</h2>
+    <p>آخر خطوة: اضغط الزر لإرسال التأكيد عبر واتساب</p>
+    <button class="wa" onclick="waConfirm()">💬 أرسل التأكيد عبر واتساب</button>
+    <button class="close" onclick="document.getElementById('successOverlay').classList.remove('show')">إغلاق</button>
+  </div>
 </div>
 
 <script>
 firebase.initializeApp({
-    apiKey:"AIzaSyBmQlAnDbaVeZOz1lZbRsH-NyJ7TgTfBPU",
-    authDomain:"saad-clinic.firebaseapp.com",
-    databaseURL:"https://saad-clinic-default-rtdb.firebaseio.com",
-    projectId:"saad-clinic",
-    storageBucket:"saad-clinic.firebasestorage.app",
-    messagingSenderId:"216860298716",
-    appId:"1:216860298716:web:6f2e31e3267f8d1487d319",
-    measurementId:"G-3DBY6CC5HD"
+  apiKey:"AIzaSyBmQlAnDbaVeZOz1lZbRsH-NyJ7TgTfBPU",
+  authDomain:"saad-clinic.firebaseapp.com",
+  databaseURL:"https://saad-clinic-default-rtdb.firebaseio.com",
+  projectId:"saad-clinic",
+  storageBucket:"saad-clinic.firebasestorage.app",
+  messagingSenderId:"216860298716",
+  appId:"1:216860298716:web:6f2e31e3267f8d1487d319",
+  measurementId:"G-3DBY6CC5HD"
 });
-const db = firebase.database();
-const VAULT = "https://script.google.com/macros/s/AKfycbyJ6VCB9wXgMP-txhLSANSbSfyjBO75rOCYxwL2uzmeZdq14gUM4fNh2Rg3d6SVo34/exec";
-
+const db=firebase.database();
+const VAULT="https://script.google.com/macros/s/AKfycbyJ6VCB9wXgMP-txhLSANSbSfyjBO75rOCYxwL2uzmeZdq14gUM4fNh2Rg3d6SVo34/exec";
+const BTN='📅 تأكيد الحجز';
+const TG_TOKEN='8488908918:AAHTeCbGzfBNrc0inWjnbCDIzMPKtTxW47I';
+const TG_CHATS=['51069776']; /* add the secretary's ID here: ['51069776','HER_ID'] */
+const $=id=>document.getElementById(id);
 function norm(s){return s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))}
 
-/* Day Chips */
 function pick(el,val){
-    document.querySelectorAll('#gDay .chip').forEach(c=>c.classList.remove('on'));
-    el.classList.add('on');
-    document.getElementById('ptDay').value=val;
-    document.getElementById('errDay').classList.remove('show');
+  document.querySelectorAll('#gDay .chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');$('ptDay').value=val;$('errDay').classList.remove('show');
 }
 
-/* Inline Validation */
 function validate(){
-    let ok=true;
-    const n=document.getElementById('ptName');
-    const p=document.getElementById('ptPhone');
-    const d=document.getElementById('ptDay').value;
-
-    // reset
-    n.classList.remove('error');p.classList.remove('error');
-    document.getElementById('errName').classList.remove('show');
-    document.getElementById('errPhone').classList.remove('show');
-    document.getElementById('errDay').classList.remove('show');
-
-    if(!n.value.trim()){n.classList.add('error');document.getElementById('errName').classList.add('show');ok=false}
-    if(!p.value.trim()||p.value.trim().length<10){p.classList.add('error');document.getElementById('errPhone').classList.add('show');ok=false}
-    if(!d){document.getElementById('errDay').classList.add('show');ok=false}
-    return ok;
+  let ok=true;
+  const n=$('ptName'),p=$('ptPhone'),d=$('ptDay').value;
+  [n,p].forEach(x=>x.classList.remove('error'));
+  ['errName','errPhone','errDay'].forEach(i=>$(i).classList.remove('show'));
+  if(!n.value.trim()){n.classList.add('error');$('errName').classList.add('show');ok=false}
+  if(norm(p.value.trim()).length<10){p.classList.add('error');$('errPhone').classList.add('show');ok=false}
+  if(!d){$('errDay').classList.add('show');ok=false}
+  if(!ok){const f=document.querySelector('.in.error,.err.show');if(f)f.scrollIntoView({behavior:'smooth',block:'center'})}
+  return ok;
 }
 
-/* Submit */
 function submit(){
-    if(!validate())return;
-
-    const n=document.getElementById('ptName').value.trim();
-    const p=document.getElementById('ptPhone').value.trim();
-    const y=document.getElementById('ptDay').value;
-
-    const btn=document.getElementById('submitBtn');
-    btn.textContent='جاري الحجز...';
-    btn.disabled=true;
-
-    const data={
-        name:n,
-        phone:norm(p),
-        preferredDay:y,
-        timestamp:new Date().toISOString(),
-        status:'pending',
-        discount:'20,000 د.ع',
-        source:'booking-v2'
-    };
-
-    db.ref('pendingBookings').push(data)
-        .then(()=>{
-            fbq('track','Lead',{currency:'IQD',value:20000});
-            fetch(VAULT,{method:'POST',mode:'no-cors',body:JSON.stringify(data)}).catch(()=>{});
-            document.getElementById('successOverlay').classList.add('show');
-            btn.textContent='📅 احجز موعدك — مجاناً';
-            btn.disabled=false;
-        })
-        .catch(()=>{
-            alert('حدث خطأ في الشبكة، يرجى المحاولة مرة أخرى');
-            btn.textContent='📅 احجز موعدك — مجاناً';
-            btn.disabled=false;
-        });
+  if(!validate())return;
+  const btn=$('submitBtn');
+  btn.textContent='جاري الحجز...';btn.disabled=true;
+  const data={
+    name:$('ptName').value.trim(),
+    phone:norm($('ptPhone').value.trim()),
+    preferredDay:$('ptDay').value,
+    timestamp:new Date().toISOString(),
+    status:'pending',
+    source:'booking-v3'
+  };
+  db.ref('pendingBookings').push(data)
+    .then(()=>{
+      fbq('track','Lead',{currency:'IQD',value:20000});
+      TG_CHATS.forEach(id=>fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({chat_id:id,text:'🆕 حجز جديد\n👤 '+data.name+'\n📞 '+data.phone+'\n📅 '+data.preferredDay})
+      }).catch(()=>{}));
+      fetch(VAULT,{method:'POST',mode:'no-cors',body:JSON.stringify(data)}).catch(()=>{});
+      $('successOverlay').classList.add('show');
+      btn.textContent=BTN;btn.disabled=false;
+    })
+    .catch(()=>{
+      alert('حدث خطأ في الشبكة، يرجى المحاولة مرة أخرى');
+      btn.textContent=BTN;btn.disabled=false;
+    });
 }
 
-/* WhatsApp Confirm */
 function waConfirm(){
-    const n=document.getElementById('ptName').value.trim();
-    const y=document.getElementById('ptDay').value;
-    const t=encodeURIComponent(
-        'مرحباً عيادة د. سعد صبري،\nقمت بتسجيل حجز إلكتروني باسم ('+n+') ليوم ('+y+').\nأرجو تأكيد الموعد — مشمول بخصم الحجز الإلكتروني (20,000 د.ع).'
-    );
-    fbq('trackCustom','WhatsAppContact');
-    window.open('https://wa.me/9647707684499?text='+t,'_blank');
+  const t=encodeURIComponent('مرحباً عيادة د. سعد صبري،\nقمت بتسجيل حجز إلكتروني باسم ('+$('ptName').value.trim()+') ليوم ('+$('ptDay').value+').\nأرجو تأكيد الموعد.');
+  fbq('trackCustom','WhatsAppContact');
+  window.open('https://wa.me/9647707684499?text='+t,'_blank');
 }
 </script>
 </body>
