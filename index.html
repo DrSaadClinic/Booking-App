@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#F5F5F7">
-    <meta name="description" content="احجز موعدك بسهولة لدى د. سعد صبري الزبيدي — استشاري الجراحة العامة والمنظار والتجميل في بغداد، حي الجامعة.">
     <title>د. سعد صبري الزبيدي | حجز استشارة</title>
     <script>
     !function(f,b,e,v,n,t,s)
@@ -30,7 +28,6 @@
             --accent:#0071E3;--accent-hover:#0077ED;--accent-bg:rgba(0,113,227,0.06);
             --accent-ring:rgba(0,113,227,0.24);--green:#30D158;--green-dark:#28B84D;
             --green-bg:rgba(48,209,88,0.08);--orange:#FF9F0A;--orange-bg:rgba(255,159,10,0.07);
-            --gold:#E8C15A;--gold-dark:#C9982A;
             --sep:rgba(60,60,67,0.06);--input-bg:#F5F5F7;
             --r-sm:10px;--r-md:14px;--r-lg:20px;
             --shadow:0 0.5px 0 0 rgba(0,0,0,0.04),0 2px 8px rgba(0,0,0,0.04);
@@ -41,72 +38,75 @@
             background:var(--bg);color:var(--text-1);min-height:100vh;
             -webkit-font-smoothing:antialiased;overflow-x:hidden;
         }
-        body::before{content:'';position:fixed;top:-140px;left:50%;transform:translateX(-50%);
-            width:640px;height:420px;pointer-events:none;z-index:0;
-            background:radial-gradient(ellipse at center,rgba(0,113,227,0.07),transparent 65%)}
-        .page{position:relative;z-index:1;max-width:460px;width:100%;margin:0 auto;padding:48px 20px 40px}
+        .page{max-width:460px;width:100%;margin:0 auto;padding:48px 20px 60px}
 
         /* Animations */
         .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .55s var(--ease) forwards}
         @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-        /* HERO */
-        .hero{text-align:center;margin-bottom:24px}
-        .hero-ring{position:relative;width:112px;height:112px;margin:0 auto 22px;
-            display:flex;align-items:center;justify-content:center}
-        .hero-ring::before{content:'';position:absolute;inset:-4px;border-radius:50%;
-            background:conic-gradient(from 0deg,#0071E3 0deg,#30D158 115deg,#E8C15A 230deg,#0071E3 360deg);
-            animation:spin 5s linear infinite;
-            -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 4px));
-            mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 4px))}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        .hero-img{width:102px;height:102px;border-radius:50%;object-fit:cover;
-            position:relative;z-index:1;border:3px solid #fff;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-        .hero-badge{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);z-index:2;
-            background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;white-space:nowrap;
-            font-size:11px;font-weight:800;padding:5px 14px;border-radius:20px;
-            box-shadow:0 3px 10px rgba(201,152,42,0.45)}
-        .hero-name{font-size:28px;font-weight:800;letter-spacing:-0.4px;margin-bottom:3px}
-        .hero-sub{font-size:15.5px;color:var(--text-2);line-height:1.5}
+        /* Hero */
+        .hero{text-align:center;margin-bottom:28px}
+        .hero-img{
+            width:96px;height:96px;border-radius:50%;object-fit:cover;
+            margin-bottom:14px;box-shadow:0 4px 20px rgba(0,0,0,0.08);
+            border:3px solid #fff;
+        }
+        .hero-name{font-size:28px;font-weight:800;letter-spacing:-0.4px;margin-bottom:2px}
+        .hero-sub{font-size:15px;color:var(--text-2);line-height:1.5;margin-bottom:16px}
 
         /* Trust Bar */
-        .trust{display:flex;justify-content:center;gap:18px;margin-bottom:8px;flex-wrap:wrap}
+        .trust{
+            display:flex;justify-content:center;gap:24px;
+            margin-bottom:8px;
+        }
         .trust-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text-2)}
-        .trust-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+        .trust-icon{
+            width:28px;height:28px;border-radius:8px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:14px;
+        }
         .trust-icon.blue{background:var(--accent-bg);color:var(--accent)}
         .trust-icon.green{background:var(--green-bg);color:var(--green)}
-        .trust-icon.org{background:var(--orange-bg);color:var(--orange)}
         .trust-num{font-weight:800;color:var(--text-1);font-size:15px}
 
-        /* Specialties — plain text, NOT clickable */
-        .specs{text-align:center;font-size:13px;color:var(--text-3);line-height:1.8;margin-bottom:26px}
+        /* Specialties - plain text, NOT clickable */
+        .specs{
+            text-align:center;font-size:13px;color:var(--text-3);
+            line-height:1.8;margin-bottom:28px;
+        }
+        .specs span{
+            display:inline;
+            /* No background, no border, no hover — pure text */
+        }
         .spec-sep{margin:0 2px;color:var(--text-3);opacity:0.5}
 
-        /* Pride Banner */
-        .pride{position:relative;overflow:hidden;border-radius:var(--r-lg);
-            background:linear-gradient(135deg,#1C1C1E 0%,#2C2C2E 55%,#3B2F16 100%);
-            padding:20px;display:flex;align-items:center;gap:14px;margin-bottom:30px;
-            box-shadow:0 10px 26px rgba(0,0,0,0.16)}
-        .pride::before{content:'';position:absolute;inset:0;
-            background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,0.08) 50%,transparent 58%);
-            transform:translateX(-160%);animation:sweep 4.2s ease-in-out infinite}
-        @keyframes sweep{0%{transform:translateX(-160%)}55%,100%{transform:translateX(160%)}}
-        .pride-flag{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,0.09);
-            display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
-        .pride-text b{display:block;font-size:16.5px;font-weight:800;color:#F2D57E;margin-bottom:3px}
-        .pride-text span{font-size:13px;color:rgba(255,255,255,0.78);line-height:1.55}
+        /* Discount Banner */
+        .discount{
+            background:linear-gradient(135deg,rgba(255,159,10,0.1) 0%,rgba(255,159,10,0.04) 100%);
+            border:1px solid rgba(255,159,10,0.15);
+            border-radius:var(--r-lg);padding:18px 20px;margin-bottom:32px;
+            display:flex;align-items:center;gap:14px;
+        }
+        .discount-badge{
+            width:44px;height:44px;border-radius:12px;
+            background:linear-gradient(135deg,#FF9F0A,#FFB340);color:#fff;
+            display:flex;align-items:center;justify-content:center;flex-shrink:0;
+            font-size:20px;font-weight:800;
+        }
+        .discount-text{font-size:15px;font-weight:500;line-height:1.6;color:var(--text-1)}
+        .discount-text b{color:#E08600;font-weight:700}
+        .discount-text s{color:var(--text-3);font-weight:400}
 
         /* Form Section */
-        .form-section{background:var(--card);border-radius:var(--r-lg);
-            box-shadow:var(--shadow);padding:28px 22px;margin-bottom:20px}
-        .form-h{font-size:21px;font-weight:800;margin-bottom:4px}
+        .form-section{
+            background:var(--card);border-radius:var(--r-lg);
+            box-shadow:var(--shadow);padding:28px 22px;margin-bottom:24px;
+        }
+        .form-h{font-size:20px;font-weight:800;margin-bottom:4px}
         .form-p{font-size:14px;color:var(--text-2);margin-bottom:24px;line-height:1.5}
 
         .field{margin-bottom:16px}
-        .field-lbl{display:block;font-size:14px;font-weight:700;color:var(--text-2);margin-bottom:7px}
-        .step-num{display:inline-flex;align-items:center;justify-content:center;
-            width:21px;height:21px;border-radius:50%;background:var(--accent-bg);color:var(--accent);
-            font-size:12px;font-weight:800;margin-inline-end:7px;vertical-align:-4px}
+        .field-lbl{display:block;font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:6px}
         .field-in{
             width:100%;padding:14px 16px;background:var(--input-bg);
             border:1.5px solid transparent;border-radius:var(--r-md);
@@ -120,21 +120,21 @@
         }
         .field-in.ltr{direction:ltr;text-align:right}
 
-        /* Day chips (with real dates) */
-        .chip-lbl{font-size:14px;font-weight:700;color:var(--text-2);margin-bottom:8px}
+        /* Day chips */
+        .chip-lbl{font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:8px}
         .chips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
         .chip{
-            background:var(--input-bg);border:1.5px solid transparent;padding:12px 8px;
-            text-align:center;border-radius:var(--r-md);cursor:pointer;user-select:none;
-            display:flex;flex-direction:column;gap:2px;transition:all .2s var(--ease);
+            background:var(--input-bg);border:1.5px solid transparent;
+            padding:13px 10px;text-align:center;border-radius:var(--r-md);
+            font-size:15px;font-weight:500;color:var(--text-2);
+            cursor:pointer;user-select:none;transition:all .2s var(--ease);
             -webkit-tap-highlight-color:transparent;
         }
         .chip:hover{background:#EDEDF0}
-        .chip.on{background:var(--accent-bg);border-color:var(--accent)}
-        .chip-day{font-size:15px;font-weight:600;color:var(--text-2)}
-        .chip-date{font-size:11.5px;font-weight:500;color:var(--text-3)}
-        .chip.on .chip-day{color:var(--accent);font-weight:700}
-        .chip.on .chip-date{color:var(--accent)}
+        .chip.on{
+            background:var(--accent-bg);border-color:var(--accent);
+            color:var(--accent);font-weight:600;
+        }
 
         /* Submit Button */
         .btn-submit{
@@ -143,45 +143,30 @@
             font-size:17px;font-weight:700;font-family:inherit;
             cursor:pointer;transition:all .2s var(--ease);
             text-align:center;background:var(--green);color:#fff;
-            box-shadow:0 6px 18px rgba(48,209,88,0.30);
         }
-        .btn-submit:hover{background:var(--green-dark);box-shadow:0 8px 24px rgba(48,209,88,0.42)}
+        .btn-submit:hover{background:var(--green-dark)}
         .btn-submit:active{transform:scale(0.975)}
-        .btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
-
-        /* Direct Contact */
-        .call-card{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--shadow);
-            padding:22px;text-align:center;margin-bottom:20px}
-        .call-h{font-size:16px;font-weight:800;margin-bottom:2px}
-        .call-p{font-size:13.5px;color:var(--text-2);margin-bottom:16px}
-        .btn-call{display:block;text-decoration:none;background:var(--accent);color:#fff;
-            border-radius:var(--r-md);padding:15px;font-size:16px;font-weight:700;font-family:inherit;
-            margin-bottom:10px;transition:all .2s var(--ease);box-shadow:0 6px 18px rgba(0,113,227,0.26)}
-        .btn-call:hover{background:var(--accent-hover);box-shadow:0 8px 22px rgba(0,113,227,0.36)}
-        .btn-call:active{transform:scale(0.97)}
-        .btn-call .num{font-size:19px;font-weight:800;letter-spacing:.5px}
-        .btn-call-wa{display:flex;align-items:center;justify-content:center;gap:8px;
-            text-decoration:none;background:var(--green-bg);color:var(--green-dark);
-            border:1.5px solid rgba(48,209,88,0.35);border-radius:var(--r-md);padding:13px;
-            font-size:16px;font-weight:700;font-family:inherit;transition:all .2s var(--ease)}
-        .btn-call-wa:hover{background:rgba(48,209,88,0.15)}
-        .btn-call-wa:active{transform:scale(0.97)}
+        .btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none}
 
         /* Clinic Info Card */
-        .info-card{background:var(--card);border-radius:var(--r-lg);
-            box-shadow:var(--shadow);overflow:hidden;margin-bottom:24px}
-        .info-row{display:flex;align-items:flex-start;gap:14px;padding:14px 20px}
+        .info-card{
+            background:var(--card);border-radius:var(--r-lg);
+            box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;
+        }
+        .info-row{
+            display:flex;align-items:flex-start;gap:14px;padding:14px 20px;
+        }
         .info-row+.info-row{border-top:.5px solid var(--sep)}
-        .info-icon{width:32px;height:32px;border-radius:var(--r-sm);
-            display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+        .info-icon{
+            width:32px;height:32px;border-radius:var(--r-sm);
+            display:flex;align-items:center;justify-content:center;
+            flex-shrink:0;font-size:15px;
+        }
         .info-icon.blue{color:var(--accent);background:var(--accent-bg)}
         .info-icon.org{color:var(--orange);background:var(--orange-bg)}
         .info-lbl{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px}
-        .info-val{font-size:15px;font-weight:500;color:var(--text-1);line-height:1.45}
-        .info-val a{color:var(--accent);text-decoration:none;font-weight:700}
-
-        /* Footer */
-        .foot{text-align:center;font-size:12.5px;color:var(--text-3);line-height:1.6}
+        .info-val{font-size:14px;font-weight:500;color:var(--text-1);line-height:1.45}
+        .info-val a{color:var(--accent);text-decoration:none}
 
         /* Success Overlay */
         .overlay{
@@ -205,11 +190,6 @@
             width:72px;height:72px;border-radius:50%;background:var(--green-bg);
             display:flex;align-items:center;justify-content:center;
             margin:0 auto 18px;
-        }
-        .warn-circle{
-            width:72px;height:72px;border-radius:50%;background:var(--orange-bg);
-            display:flex;align-items:center;justify-content:center;
-            margin:0 auto 18px;font-size:34px;
         }
         .ok-svg{width:32px;height:32px}
         .ok-svg path{
@@ -239,6 +219,13 @@
         .btn-wa:hover{transform:scale(1.02);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
         .btn-wa:active{transform:scale(0.97)}
 
+        .discount-note{
+            background:var(--orange-bg);border:.5px solid rgba(255,159,10,0.12);
+            border-radius:12px;padding:12px 16px;margin-bottom:14px;
+            font-size:13px;color:var(--text-1);text-align:right;
+        }
+        .discount-note b{color:#E08600}
+
         .btn-close-overlay{
             background:none;border:none;color:var(--text-3);
             font-size:14px;font-weight:500;font-family:inherit;
@@ -264,11 +251,8 @@
 
     <!-- HERO -->
     <div class="hero fade-up" style="animation-delay:.05s">
-        <div class="hero-ring">
-            <img src="logo.jpg" class="hero-img" alt="د. سعد صبري الزبيدي"
-                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
-            <div class="hero-badge">استشاري جراحة</div>
-        </div>
+        <img src="logo.jpg" class="hero-img" alt="د. سعد صبري الزبيدي"
+             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3304/3304567.png'">
         <h1 class="hero-name">د. سعد صبري الزبيدي</h1>
         <p class="hero-sub">استشاري الجراحة العامة والمنظار والتجميل</p>
     </div>
@@ -281,11 +265,7 @@
         </div>
         <div class="trust-item">
             <div class="trust-icon green">✅</div>
-            <div>جرّاح <span class="trust-num">استشاري</span></div>
-        </div>
-        <div class="trust-item">
-            <div class="trust-icon org">📍</div>
-            <div>بغداد</div>
+            <div>جراح <span class="trust-num">متخصص</span></div>
         </div>
     </div>
 
@@ -301,65 +281,45 @@
         الغدة الدرقية
     </div>
 
-    <!-- PRIDE BANNER -->
-    <div class="pride fade-up" style="animation-delay:.18s">
-        <div class="pride-flag">🇮🇶</div>
-        <div class="pride-text">
-            <b>طبيب عراقي… بمستوى عالمي</b>
-            <span>أكثر من ٢٦ عاماً من الخبرة والإتقان في خدمة صحة العراقيين</span>
+    <!-- DISCOUNT BANNER -->
+    <div class="discount fade-up" style="animation-delay:.18s">
+        <div class="discount-badge">%</div>
+        <div class="discount-text">
+            خصم الحجز الإلكتروني: الفحص <b>20,000 د.ع</b> بدلاً من <s>25,000</s>
         </div>
     </div>
 
-    <!-- BOOKING FORM — 3 simple steps -->
+    <!-- BOOKING FORM — 3 fields only -->
     <div class="form-section fade-up" style="animation-delay:.22s">
-        <h2 class="form-h">احجز موعدك بسهولة</h2>
-        <p class="form-p">٣ خطوات بسيطة فقط، وسنتواصل معك لتأكيد الموعد</p>
+        <h2 class="form-h">احجز موعدك الآن</h2>
+        <p class="form-p">ادخل بياناتك وسنتواصل معك لتأكيد الموعد</p>
 
         <div class="field">
-            <label class="field-lbl" for="ptName"><span class="step-num">١</span> الاسم الكريم</label>
+            <label class="field-lbl" for="ptName">الاسم</label>
             <input class="field-in" type="text" id="ptName" placeholder="اسمك الكريم" required autocomplete="name">
             <div class="field-error" id="errName">يرجى إدخال الاسم</div>
         </div>
         <div class="field">
-            <label class="field-lbl" for="ptPhone"><span class="step-num">٢</span> رقم الهاتف</label>
+            <label class="field-lbl" for="ptPhone">رقم الهاتف</label>
             <input class="field-in ltr" type="text" inputmode="tel" id="ptPhone" placeholder="07XX XXX XXXX" required autocomplete="tel"
                    oninput="this.value=this.value.replace(/[^0-9٠-٩+]/g,'')">
-            <div class="field-error" id="errPhone">يرجى إدخال رقم الهاتف بشكل صحيح</div>
+            <div class="field-error" id="errPhone">يرجى إدخال رقم الهاتف</div>
         </div>
 
-        <div class="chip-lbl"><span class="step-num">٣</span> اختر اليوم المناسب</div>
+        <div class="chip-lbl">اختر اليوم المفضل</div>
         <div class="chips" id="gDay">
-            <div class="chip" id="chipWed" onclick="pick(this)">
-                <span class="chip-day">الأربعاء</span><span class="chip-date"></span>
-            </div>
-            <div class="chip" id="chipThu" onclick="pick(this)">
-                <span class="chip-day">الخميس</span><span class="chip-date"></span>
-            </div>
-            <div class="chip" id="chipSat" onclick="pick(this)">
-                <span class="chip-day">السبت</span><span class="chip-date"></span>
-            </div>
+            <div class="chip" onclick="pick(this,'الأربعاء')">الأربعاء</div>
+            <div class="chip" onclick="pick(this,'الخميس')">الخميس</div>
+            <div class="chip" onclick="pick(this,'السبت')">السبت</div>
         </div>
         <div class="chip-group-error" id="errDay">يرجى اختيار يوم</div>
         <input type="hidden" id="ptDay" value="">
 
-        <button class="btn-submit" id="submitBtn" onclick="submit()">📅 احجز موعدك الآن</button>
-    </div>
-
-    <!-- DIRECT CONTACT -->
-    <div class="call-card fade-up" style="animation-delay:.26s">
-        <div class="call-h">تفضّل التواصل المباشر؟</div>
-        <div class="call-p">اتصل بنا الآن وسنساعدك في حجز موعدك فوراً</div>
-        <a href="tel:+9647707684499" class="btn-call" onclick="fbq('trackCustom','DirectCall')">
-            📞 <span class="num" dir="ltr">0770 768 4499</span>
-        </a>
-        <a href="https://wa.me/9647707684499" class="btn-call-wa" onclick="fbq('trackCustom','DirectWhatsApp')">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.359 0-4.543-.815-6.262-2.18l-.438-.362-3.3 1.106 1.106-3.3-.362-.438A9.955 9.955 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-            تواصل عبر واتساب
-        </a>
+        <button class="btn-submit" id="submitBtn" onclick="submit()">📅 احجز موعدك — </button>
     </div>
 
     <!-- CLINIC INFO -->
-    <div class="info-card fade-up" style="animation-delay:.3s">
+    <div class="info-card fade-up" style="animation-delay:.28s">
         <div class="info-row">
             <div class="info-icon blue">📍</div>
             <div>
@@ -371,7 +331,7 @@
             <div class="info-icon blue">📞</div>
             <div>
                 <div class="info-lbl">الاتصال</div>
-                <div class="info-val"><a href="tel:+9647707684499" dir="ltr">0770 768 4499</a></div>
+                <div class="info-val"><a href="https://wa.me/9647707684499" dir="ltr">0770 768 4499</a></div>
             </div>
         </div>
         <div class="info-row">
@@ -382,8 +342,6 @@
             </div>
         </div>
     </div>
-
-    <div class="foot fade-up" style="animation-delay:.34s">🇮🇶 كفاءة عراقية نعتزّ بها — نتمنى لكم دوام الصحة والعافية</div>
 
 </div>
 
@@ -405,41 +363,13 @@
             <button class="btn-wa" onclick="waConfirm()">إرسال تأكيد الحجز ←</button>
         </div>
 
+        <div class="discount-note">🏷️ أجور الفحص بالخصم: <b>20,000 د.ع</b></div>
+
         <button class="btn-close-overlay" onclick="document.getElementById('successOverlay').classList.remove('show')">إغلاق</button>
     </div>
 </div>
 
-<!-- FALLBACK OVERLAY — يظهر فقط إذا فشل الإرسال التلقائي -->
-<div class="overlay" id="fallbackOverlay">
-    <div class="success-card">
-        <div class="warn-circle">⚠️</div>
-        <h2 class="ok-h">تعذّر الإرسال التلقائي</h2>
-        <p class="ok-p">لا تقلق — أرسل حجزك مباشرة عبر واتساب بضغطة واحدة وسيصل للعيادة فوراً</p>
-
-        <div class="wa-box">
-            <div class="wa-box-title">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.359 0-4.543-.815-6.262-2.18l-.438-.362-3.3 1.106 1.106-3.3-.362-.438A9.955 9.955 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-                إرسال الحجز عبر واتساب
-            </div>
-            <div class="wa-box-body">رسالة جاهزة تحتوي كامل تفاصيل حجزك</div>
-            <button class="btn-wa" onclick="waFallback()">إرسال حجزي الآن ←</button>
-        </div>
-
-        <button class="btn-close-overlay" onclick="document.getElementById('fallbackOverlay').classList.remove('show')">إغلاق</button>
-    </div>
-</div>
-
 <script>
-/* ═══════════ الإعدادات ═══════════
-   ⚠️ بعد عمل Revoke في BotFather ستحصل على توكن جديد بشكل:
-   8488908918:AbCdEf...
-   انسخ الجزء الثاني فقط (كل ما بعد النقطتين) وضعه في TG_KEY بالأسفل
-*/
-const TG_BOT  = '8488908918';
-const TG_KEY  = '8488908918:AAGWWyeOLIntietadAESRoIFCV_QJWit3t4';
-const TG_CHAT = '51069776';
-const TG_TOKEN = TG_BOT + ':' + TG_KEY;
-
 firebase.initializeApp({
     apiKey:"AIzaSyBmQlAnDbaVeZOz1lZbRsH-NyJ7TgTfBPU",
     authDomain:"saad-clinic.firebaseapp.com",
@@ -451,46 +381,26 @@ firebase.initializeApp({
     measurementId:"G-3DBY6CC5HD"
 });
 const db = firebase.database();
+const VAULT = "https://script.google.com/macros/s/AKfycbyJ6VCB9wXgMP-txhLSANSbSfyjBO75rOCYxwL2uzmeZdq14gUM4fNh2Rg3d6SVo34/exec";
 
 function norm(s){return s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))}
 
-/* --- تواريخ الأيام القادمة --- */
-const AR='٠١٢٣٤٥٦٧٨٩';
-const MONTHS=['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
-function arNum(n){return String(n).replace(/\d/g,c=>AR[+c])}
-function nextDate(idx){
-    const d=new Date();
-    d.setDate(d.getDate()+((idx-d.getDay()+7)%7));
-    return d;
-}
-[
-    {id:'chipWed',day:'الأربعاء',idx:3},
-    {id:'chipThu',day:'الخميس',idx:4},
-    {id:'chipSat',day:'السبت',idx:6},
-].forEach(o=>{
-    const chip=document.getElementById(o.id);
-    if(!chip)return;
-    const d=nextDate(o.idx);
-    const dateTxt=arNum(d.getDate())+' '+MONTHS[d.getMonth()];
-    chip.querySelector('.chip-date').textContent=dateTxt;
-    chip.dataset.val=o.day+' — '+dateTxt;
-});
-
-/* اختيار اليوم */
-function pick(el){
+/* Day Chips */
+function pick(el,val){
     document.querySelectorAll('#gDay .chip').forEach(c=>c.classList.remove('on'));
     el.classList.add('on');
-    document.getElementById('ptDay').value=el.dataset.val||el.querySelector('.chip-day').textContent;
+    document.getElementById('ptDay').value=val;
     document.getElementById('errDay').classList.remove('show');
 }
 
-/* التحقق من الحقول */
+/* Inline Validation */
 function validate(){
     let ok=true;
     const n=document.getElementById('ptName');
     const p=document.getElementById('ptPhone');
     const d=document.getElementById('ptDay').value;
 
+    // reset
     n.classList.remove('error');p.classList.remove('error');
     document.getElementById('errName').classList.remove('show');
     document.getElementById('errPhone').classList.remove('show');
@@ -502,37 +412,7 @@ function validate(){
     return ok;
 }
 
-/* ✈️ إرسال إشعار التلغرام */
-function sendTelegramBooking(data){
-    const msg =
-        '🔔 حجز جديد من الموقع\n' +
-        '━━━━━━━━━━━━━\n' +
-        '👤 الاسم: ' + data.name + '\n' +
-        '📞 الهاتف: ' + data.phone + '\n' +
-        '📅 اليوم: ' + (data.bookingDate || data.preferredDay || '') + '\n' +
-        '🕐 التسجيل: ' + new Date().toLocaleString('en-GB',{timeZone:'Baghdad'}) + '\n' +
-        '━━━━━━━━━━━━━\n' +
-        '⏳ بانتظار تأكيد المريض عبر واتساب';
-    return fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
-        method:'POST',
-        body:new URLSearchParams({chat_id:TG_CHAT,text:msg})
-    }).then(function(r){
-        if(!r.ok){console.warn('Telegram error:',r.status);throw new Error('TG '+r.status)}
-    });
-}
-
-/* مهلة زمنية — حتى لا يبقى أي طلب معلقاً للأبد */
-function withTimeout(promise,ms){
-    return new Promise(function(resolve,reject){
-        const t=setTimeout(function(){reject(new Error('timeout'))},ms);
-        promise.then(
-            function(v){clearTimeout(t);resolve(v)},
-            function(e){clearTimeout(t);reject(e)}
-        );
-    });
-}
-
-/* إرسال الحجز */
+/* Submit */
 function submit(){
     if(!validate())return;
 
@@ -541,67 +421,42 @@ function submit(){
     const y=document.getElementById('ptDay').value;
 
     const btn=document.getElementById('submitBtn');
-    btn.textContent='جاري إرسال الحجز...';
+    btn.textContent='جاري الحجز...';
     btn.disabled=true;
 
     const data={
         name:n,
         phone:norm(p),
-        preferredDay:y.split(' — ')[0],
-        bookingDate:y,
+        preferredDay:y,
         timestamp:new Date().toISOString(),
         status:'pending',
-        source:'booking-v3'
+        discount:'20,000 د.ع',
+        source:'booking-v2'
     };
 
-    let finished=false;
-    function success(){
-        if(finished)return;finished=true;
-        try{fbq('track','Lead')}catch(e){}
-        document.getElementById('successOverlay').classList.add('show');
-        btn.textContent='📅 احجز موعدك الآن';
-        btn.disabled=false;
-    }
-    function fallback(){
-        if(finished)return;finished=true;
-        try{fbq('trackCustom','BookingFallbackWhatsApp')}catch(e){}
-        document.getElementById('fallbackOverlay').classList.add('show');
-        btn.textContent='📅 احجز موعدك الآن';
-        btn.disabled=false;
-    }
-
-    /* أرشفة صامتة في فايربيز — لا توقف شيئاً مهما حدث */
-    try{db.ref('pendingBookings').push(data).catch(()=>{});}catch(e){}
-
-    /* التلغرام هو القناة الأساسية — مع مهلة ٩ ثوان فقط */
-    try{
-        withTimeout(sendTelegramBooking(data),9000).then(success,fallback);
-    }catch(e){fallback();}
-
-    /* شبكة أمان نهائية — الزر لا يبقى معلقاً أبداً */
-    setTimeout(function(){if(!finished)fallback();},14000);
+    db.ref('pendingBookings').push(data)
+        .then(()=>{
+            fbq('track','Lead',{currency:'IQD',value:20000});
+            fetch(VAULT,{method:'POST',mode:'no-cors',body:JSON.stringify(data)}).catch(()=>{});
+            document.getElementById('successOverlay').classList.add('show');
+            btn.textContent='📅 احجز موعدك — مجاناً';
+            btn.disabled=false;
+        })
+        .catch(()=>{
+            alert('حدث خطأ في الشبكة، يرجى المحاولة مرة أخرى');
+            btn.textContent='📅 احجز موعدك — مجاناً';
+            btn.disabled=false;
+        });
 }
 
-/* تأكيد واتساب — بعد النجاح */
+/* WhatsApp Confirm */
 function waConfirm(){
     const n=document.getElementById('ptName').value.trim();
     const y=document.getElementById('ptDay').value;
     const t=encodeURIComponent(
-        'مرحباً عيادة د. سعد صبري الزبيدي،\nقمت بتسجيل حجز إلكتروني باسم ('+n+') ليوم ('+y+').\nأرجو تأكيد الموعد، شكراً لكم.'
+        'مرحباً عيادة د. سعد صبري،\nقمت بتسجيل حجز إلكتروني باسم ('+n+') ليوم ('+y+').\nأرجو تأكيد الموعد — مشمول بخصم الحجز الإلكتروني (20,000 د.ع).'
     );
-    try{fbq('trackCustom','WhatsAppContact')}catch(e){}
-    window.open('https://wa.me/9647707684499?text='+t,'_blank');
-}
-
-/* واتساب بديل — إذا فشل الإرسال التلقائي */
-function waFallback(){
-    const n=document.getElementById('ptName').value.trim();
-    const p=document.getElementById('ptPhone').value.trim();
-    const y=document.getElementById('ptDay').value;
-    const t=encodeURIComponent(
-        'مرحباً عيادة د. سعد صبري الزبيدي،\nأرغب بحجز موعد:\n👤 الاسم: '+n+'\n📞 الهاتف: '+p+'\n📅 اليوم: '+y
-    );
-    try{fbq('trackCustom','WhatsAppContact')}catch(e){}
+    fbq('trackCustom','WhatsAppContact');
     window.open('https://wa.me/9647707684499?text='+t,'_blank');
 }
 </script>
