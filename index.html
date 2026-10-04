@@ -149,7 +149,7 @@
         .btn-submit:active{transform:scale(0.975)}
         .btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
 
-        /* Direct Contact — للتواصل المباشر */
+        /* Direct Contact */
         .call-card{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--shadow);
             padding:22px;text-align:center;margin-bottom:20px}
         .call-h{font-size:16px;font-weight:800;margin-bottom:2px}
@@ -340,7 +340,7 @@
         <button class="btn-submit" id="submitBtn" onclick="submit()">📅 احجز موعدك الآن</button>
     </div>
 
-    <!-- DIRECT CONTACT — للكبار بالسن -->
+    <!-- DIRECT CONTACT -->
     <div class="call-card fade-up" style="animation-delay:.26s">
         <div class="call-h">تفضّل التواصل المباشر؟</div>
         <div class="call-p">اتصل بنا الآن وسنساعدك في حجز موعدك فوراً</div>
@@ -405,6 +405,10 @@
 </div>
 
 <script>
+/* ═══════════ الإعدادات ═══════════ */
+const TG_TOKEN = '8488908918:AAF0SXgMnq1bvFN9R7IsgIsRy2WrOarki60';
+const TG_CHAT  = '51069776';
+
 firebase.initializeApp({
     apiKey:"AIzaSyBmQlAnDbaVeZOz1lZbRsH-NyJ7TgTfBPU",
     authDomain:"saad-clinic.firebaseapp.com",
@@ -416,11 +420,10 @@ firebase.initializeApp({
     measurementId:"G-3DBY6CC5HD"
 });
 const db = firebase.database();
-const VAULT = "https://script.google.com/macros/s/AKfycbyJ6VCB9wXgMP-txhLSANSbSfyjBO75rOCYxwL2uzmeZdq14gUM4fNh2Rg3d6SVo34.exec";
 
 function norm(s){return s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))}
 
-/* --- Real upcoming dates for clinic days (auto-calculated) --- */
+/* --- تواريخ الأيام القادمة --- */
 const AR='٠١٢٣٤٥٦٧٨٩';
 const MONTHS=['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
 function arNum(n){return String(n).replace(/\d/g,c=>AR[+c])}
@@ -442,7 +445,7 @@ function nextDate(idx){
     chip.dataset.val=o.day+' — '+dateTxt;
 });
 
-/* Day Chips */
+/* اختيار اليوم */
 function pick(el){
     document.querySelectorAll('#gDay .chip').forEach(c=>c.classList.remove('on'));
     el.classList.add('on');
@@ -450,7 +453,7 @@ function pick(el){
     document.getElementById('errDay').classList.remove('show');
 }
 
-/* Inline Validation */
+/* التحقق من الحقول */
 function validate(){
     let ok=true;
     const n=document.getElementById('ptName');
@@ -468,7 +471,25 @@ function validate(){
     return ok;
 }
 
-/* Submit */
+/* ✈️ إرسال إشعار التلغرام مباشرة من الصفحة */
+function sendTelegramBooking(data){
+    const msg =
+        '🔔 حجز جديد من الموقع\n' +
+        '━━━━━━━━━━━━━\n' +
+        '👤 الاسم: ' + data.name + '\n' +
+        '📞 الهاتف: ' + data.phone + '\n' +
+        '📅 اليوم: ' + (data.bookingDate || data.preferredDay || '') + '\n' +
+        '🕐 التسجيل: ' + new Date().toLocaleString('en-GB',{timeZone:'Baghdad'}) + '\n' +
+        '━━━━━━━━━━━━━\n' +
+        '⏳ بانتظار تأكيد المريض عبر واتساب';
+    return fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({chat_id:TG_CHAT,text:msg})
+    }).then(r=>{if(!r.ok)throw new Error('TG '+r.status)});
+}
+
+/* إرسال الحجز */
 function submit(){
     if(!validate())return;
 
@@ -483,28 +504,30 @@ function submit(){
     const data={
         name:n,
         phone:norm(p),
-        preferredDay:y,
+        preferredDay:y.split(' — ')[0],
+        bookingDate:y,
         timestamp:new Date().toISOString(),
         status:'pending',
-        source:'booking-v2'
+        source:'booking-v3'
     };
 
-    db.ref('pendingBookings').push(data)
-        .then(()=>{
-            fbq('track','Lead');
-            fetch(VAULT,{method:'POST',mode:'no-cors',body:JSON.stringify(data)}).catch(()=>{});
-            document.getElementById('successOverlay').classList.add('show');
-            btn.textContent='📅 احجز موعدك الآن';
-            btn.disabled=false;
-        })
-        .catch(()=>{
+    // إرسال للتلغرام + حفظ نسخة احتياطية في فايربيز — يكفي نجاح أحدهما
+    const tg = sendTelegramBooking(data).then(()=>'ok').catch(()=>{console.warn('telegram failed');return'fail'});
+    const fb = db.ref('pendingBookings').push(data).then(()=>'ok').catch(()=>{console.warn('firebase failed');return'fail'});
+
+    Promise.all([tg,fb]).then(r=>{
+        if(r[0]==='fail' && r[1]==='fail'){
             alert('حدث خطأ في الشبكة، يرجى المحاولة مرة أخرى');
-            btn.textContent='📅 احجز موعدك الآن';
-            btn.disabled=false;
-        });
+        }else{
+            fbq('track','Lead');
+            document.getElementById('successOverlay').classList.add('show');
+        }
+        btn.textContent='📅 احجز موعدك الآن';
+        btn.disabled=false;
+    });
 }
 
-/* WhatsApp Confirm */
+/* تأكيد واتساب */
 function waConfirm(){
     const n=document.getElementById('ptName').value.trim();
     const y=document.getElementById('ptDay').value;
