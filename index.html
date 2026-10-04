@@ -206,6 +206,11 @@
             display:flex;align-items:center;justify-content:center;
             margin:0 auto 18px;
         }
+        .warn-circle{
+            width:72px;height:72px;border-radius:50%;background:var(--orange-bg);
+            display:flex;align-items:center;justify-content:center;
+            margin:0 auto 18px;font-size:34px;
+        }
         .ok-svg{width:32px;height:32px}
         .ok-svg path{
             stroke:var(--green);stroke-width:2.8;stroke-linecap:round;
@@ -300,8 +305,8 @@
     <div class="pride fade-up" style="animation-delay:.18s">
         <div class="pride-flag">🇮🇶</div>
         <div class="pride-text">
-            <b>الدكتور سعد صبري الزبيدي</b>
-            <span>أكثر من ٢٦ عاماً من الخبرة </span>
+            <b>طبيب عراقي… بمستوى عالمي</b>
+            <span>أكثر من ٢٦ عاماً من الخبرة والإتقان في خدمة صحة العراقيين</span>
         </div>
     </div>
 
@@ -404,10 +409,36 @@
     </div>
 </div>
 
+<!-- FALLBACK OVERLAY — يظهر فقط إذا فشل الإرسال التلقائي -->
+<div class="overlay" id="fallbackOverlay">
+    <div class="success-card">
+        <div class="warn-circle">⚠️</div>
+        <h2 class="ok-h">تعذّر الإرسال التلقائي</h2>
+        <p class="ok-p">لا تقلق — أرسل حجزك مباشرة عبر واتساب بضغطة واحدة وسيصل للعيادة فوراً</p>
+
+        <div class="wa-box">
+            <div class="wa-box-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.359 0-4.543-.815-6.262-2.18l-.438-.362-3.3 1.106 1.106-3.3-.362-.438A9.955 9.955 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                إرسال الحجز عبر واتساب
+            </div>
+            <div class="wa-box-body">رسالة جاهزة تحتوي كامل تفاصيل حجزك</div>
+            <button class="btn-wa" onclick="waFallback()">إرسال حجزي الآن ←</button>
+        </div>
+
+        <button class="btn-close-overlay" onclick="document.getElementById('fallbackOverlay').classList.remove('show')">إغلاق</button>
+    </div>
+</div>
+
 <script>
-/* ═══════════ الإعدادات ═══════════ */
-const TG_TOKEN = '8488908918:AAF0SXgMnq1bvFN9R7IsgIsRy2WrOarki60';
-const TG_CHAT  = '51069776';
+/* ═══════════ الإعدادات ═══════════
+   ⚠️ بعد عمل Revoke في BotFather ستحصل على توكن جديد بشكل:
+   8488908918:AbCdEf...
+   انسخ الجزء الثاني فقط (كل ما بعد النقطتين) وضعه في TG_KEY بالأسفل
+*/
+const TG_BOT  = '8488908918';
+const TG_KEY  = '8488908918:AAGWWyeOLIntietadAESRoIFCV_QJWit3t4';
+const TG_CHAT = '51069776';
+const TG_TOKEN = TG_BOT + ':' + TG_KEY;
 
 firebase.initializeApp({
     apiKey:"AIzaSyBmQlAnDbaVeZOz1lZbRsH-NyJ7TgTfBPU",
@@ -471,7 +502,7 @@ function validate(){
     return ok;
 }
 
-/* ✈️ إرسال إشعار التلغرام مباشرة من الصفحة */
+/* ✈️ إرسال إشعار التلغرام */
 function sendTelegramBooking(data){
     const msg =
         '🔔 حجز جديد من الموقع\n' +
@@ -484,9 +515,21 @@ function sendTelegramBooking(data){
         '⏳ بانتظار تأكيد المريض عبر واتساب';
     return fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
         method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({chat_id:TG_CHAT,text:msg})
-    }).then(r=>{if(!r.ok)throw new Error('TG '+r.status)});
+        body:new URLSearchParams({chat_id:TG_CHAT,text:msg})
+    }).then(function(r){
+        if(!r.ok){console.warn('Telegram error:',r.status);throw new Error('TG '+r.status)}
+    });
+}
+
+/* مهلة زمنية — حتى لا يبقى أي طلب معلقاً للأبد */
+function withTimeout(promise,ms){
+    return new Promise(function(resolve,reject){
+        const t=setTimeout(function(){reject(new Error('timeout'))},ms);
+        promise.then(
+            function(v){clearTimeout(t);resolve(v)},
+            function(e){clearTimeout(t);reject(e)}
+        );
+    });
 }
 
 /* إرسال الحجز */
@@ -511,30 +554,54 @@ function submit(){
         source:'booking-v3'
     };
 
-    // إرسال للتلغرام + حفظ نسخة احتياطية في فايربيز — يكفي نجاح أحدهما
-    const tg = sendTelegramBooking(data).then(()=>'ok').catch(()=>{console.warn('telegram failed');return'fail'});
-    const fb = db.ref('pendingBookings').push(data).then(()=>'ok').catch(()=>{console.warn('firebase failed');return'fail'});
-
-    Promise.all([tg,fb]).then(r=>{
-        if(r[0]==='fail' && r[1]==='fail'){
-            alert('حدث خطأ في الشبكة، يرجى المحاولة مرة أخرى');
-        }else{
-            fbq('track','Lead');
-            document.getElementById('successOverlay').classList.add('show');
-        }
+    let finished=false;
+    function success(){
+        if(finished)return;finished=true;
+        try{fbq('track','Lead')}catch(e){}
+        document.getElementById('successOverlay').classList.add('show');
         btn.textContent='📅 احجز موعدك الآن';
         btn.disabled=false;
-    });
+    }
+    function fallback(){
+        if(finished)return;finished=true;
+        try{fbq('trackCustom','BookingFallbackWhatsApp')}catch(e){}
+        document.getElementById('fallbackOverlay').classList.add('show');
+        btn.textContent='📅 احجز موعدك الآن';
+        btn.disabled=false;
+    }
+
+    /* أرشفة صامتة في فايربيز — لا توقف شيئاً مهما حدث */
+    try{db.ref('pendingBookings').push(data).catch(()=>{});}catch(e){}
+
+    /* التلغرام هو القناة الأساسية — مع مهلة ٩ ثوان فقط */
+    try{
+        withTimeout(sendTelegramBooking(data),9000).then(success,fallback);
+    }catch(e){fallback();}
+
+    /* شبكة أمان نهائية — الزر لا يبقى معلقاً أبداً */
+    setTimeout(function(){if(!finished)fallback();},14000);
 }
 
-/* تأكيد واتساب */
+/* تأكيد واتساب — بعد النجاح */
 function waConfirm(){
     const n=document.getElementById('ptName').value.trim();
     const y=document.getElementById('ptDay').value;
     const t=encodeURIComponent(
         'مرحباً عيادة د. سعد صبري الزبيدي،\nقمت بتسجيل حجز إلكتروني باسم ('+n+') ليوم ('+y+').\nأرجو تأكيد الموعد، شكراً لكم.'
     );
-    fbq('trackCustom','WhatsAppContact');
+    try{fbq('trackCustom','WhatsAppContact')}catch(e){}
+    window.open('https://wa.me/9647707684499?text='+t,'_blank');
+}
+
+/* واتساب بديل — إذا فشل الإرسال التلقائي */
+function waFallback(){
+    const n=document.getElementById('ptName').value.trim();
+    const p=document.getElementById('ptPhone').value.trim();
+    const y=document.getElementById('ptDay').value;
+    const t=encodeURIComponent(
+        'مرحباً عيادة د. سعد صبري الزبيدي،\nأرغب بحجز موعد:\n👤 الاسم: '+n+'\n📞 الهاتف: '+p+'\n📅 اليوم: '+y
+    );
+    try{fbq('trackCustom','WhatsAppContact')}catch(e){}
     window.open('https://wa.me/9647707684499?text='+t,'_blank');
 }
 </script>
