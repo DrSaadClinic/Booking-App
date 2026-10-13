@@ -15,22 +15,22 @@ fbq('init','1270959085105678');fbq('track','PageView');
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #f5f7fb;
-    --surface: rgba(255,255,255,0.88);
+    --bg: #f3f1ed;
+    --surface: rgba(255,255,255,0.94);
     --surface-strong: #ffffff;
     --card: #ffffff;
-    --muted: #667085;
-    --text: #172033;
-    --text-soft: #4d5b75;
-    --line: rgba(23, 32, 51, 0.08);
-    --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
-    --blue: #0f6fff;
-    --blue-soft: rgba(15, 111, 255, 0.1);
-    --green: #12b76a;
-    --green-soft: rgba(18, 183, 106, 0.12);
-    --red: #e5484d;
-    --red-soft: rgba(229, 72, 77, 0.08);
-    --navy: #0d1d3a;
+    --muted: #5d6779;
+    --text: #1a2433;
+    --text-soft: #445066;
+    --line: rgba(26, 36, 51, 0.08);
+    --shadow: 0 14px 35px rgba(17, 24, 39, 0.06);
+    --blue: #0d5fb5;
+    --blue-soft: rgba(13, 95, 181, 0.08);
+    --green: #2f8f6b;
+    --green-soft: rgba(47, 143, 107, 0.1);
+    --red: #d94b50;
+    --red-soft: rgba(217, 75, 80, 0.08);
+    --navy: #102647;
     --r: 24px;
   }
 
@@ -39,10 +39,7 @@ fbq('init','1270959085105678');fbq('track','PageView');
     margin: 0;
     font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: var(--text);
-    background:
-      radial-gradient(circle at top right, rgba(15,111,255,0.08), transparent 35%),
-      radial-gradient(circle at bottom left, rgba(18,183,106,0.08), transparent 30%),
-      var(--bg);
+    background: linear-gradient(180deg, #f8f4f0 0%, #eef3f6 100%);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     line-height: 1.6;
@@ -53,7 +50,7 @@ fbq('init','1270959085105678');fbq('track','PageView');
     content: "";
     position: fixed;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0));
+    background: radial-gradient(circle at 12% 12%, rgba(13,95,181,0.04), transparent 30%);
     pointer-events: none;
     z-index: -1;
   }
@@ -75,8 +72,8 @@ fbq('init','1270959085105678');fbq('track','PageView');
     margin: 0 auto 14px;
     border-radius: 50%;
     padding: 4px;
-    background: linear-gradient(135deg, rgba(15,111,255,0.2), rgba(18,183,106,0.18));
-    box-shadow: 0 12px 28px rgba(15,111,255,0.12);
+    background: linear-gradient(135deg, rgba(18, 36, 55, 0.08), rgba(13,95,181,0.12));
+    box-shadow: 0 10px 24px rgba(16,38,71,0.08);
   }
   .avatar img {
     display: block;
@@ -151,15 +148,15 @@ fbq('init','1270959085105678');fbq('track','PageView');
   }
   .qbtn:active { transform: scale(0.98); }
   .qcall {
-    background: linear-gradient(180deg, #0d1d3a 0%, #132d57 100%);
+    background: #102647;
     color: white;
-    box-shadow: 0 12px 20px rgba(13,29,58,0.18);
+    box-shadow: 0 12px 20px rgba(16,38,71,0.12);
   }
   .qwa {
-    background: rgba(255,255,255,0.86);
-    border: 1px solid rgba(18,183,106,0.2);
-    color: #0d9d5a;
-    box-shadow: 0 10px 20px rgba(18,183,106,0.08);
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(47,143,107,0.18);
+    color: #1d7a57;
+    box-shadow: 0 10px 18px rgba(16,38,71,0.04);
   }
 
   .specs {
@@ -201,12 +198,12 @@ fbq('init','1270959085105678');fbq('track','PageView');
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: var(--blue);
+    background: #0d5fb5;
     border-radius: 50%;
     color: white;
     font-size: 0.86rem;
     font-style: normal;
-    box-shadow: 0 8px 18px rgba(15,111,255,0.2);
+    box-shadow: 0 8px 18px rgba(13,95,181,0.12);
   }
 
   .in {
@@ -252,7 +249,7 @@ fbq('init','1270959085105678');fbq('track','PageView');
     position: relative;
     width: 100%;
     border: 1px solid rgba(23,32,51,0.08);
-    background: #f7f9fc;
+    background: #f7f6f3;
     color: var(--text-soft);
     border-radius: 18px;
     padding: 12px 8px;
@@ -269,34 +266,39 @@ fbq('init','1270959085105678');fbq('track','PageView');
     -webkit-tap-highlight-color: transparent;
   }
   .chip .label {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.2;
   }
   .chip .date {
-    font-size: 1.45rem;
+    font-size: 1.4rem;
     line-height: 1;
     color: var(--navy);
   }
+  .chip .time {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
   .chip.on {
-    background: linear-gradient(180deg, #0f6fff, #0a5fd9);
+    background: #102647;
     color: white;
     border-color: transparent;
-    box-shadow: 0 18px 24px rgba(15,111,255,0.2);
+    box-shadow: 0 12px 22px rgba(16,38,71,0.14);
   }
-  .chip.on .date { color: white; }
+  .chip.on .date, .chip.on .time { color: white; }
 
   .go {
     width: 100%;
     border: none;
     border-radius: 18px;
-    background: linear-gradient(180deg, var(--green) 0%, #0ea25d 100%);
+    background: linear-gradient(180deg, #2f8f6b 0%, #227a59 100%);
     color: white;
     padding: 18px 16px;
     font-family: inherit;
     font-size: 1.2rem;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 0 16px 26px rgba(18,183,106,0.2);
+    box-shadow: 0 12px 22px rgba(47,143,107,0.16);
     transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
   }
   .go:active { transform: scale(0.98); }
@@ -450,6 +452,7 @@ fbq('init','1270959085105678');fbq('track','PageView');
     <div class="field" style="margin-bottom:0">
       <div class="step"><em>3</em><span>اختر اليوم المناسب</span></div>
       <div class="chips" id="gDay"></div>
+      <div style="margin-top:8px;color:var(--muted);font-size:.8rem;">الوقت المتاح: 4:00 مساءً</div>
       <div class="err" id="errDay">يرجى اختيار يوم</div>
       <input type="hidden" id="ptDay" value="">
     </div>
@@ -494,6 +497,7 @@ const TG_CHATS=['51069776'];
 const $=id=>document.getElementById(id);
 const ARABIC_DIGITS='٠١٢٣٤٥٦٧٨٩';
 const CLINIC_DAYS=[3,4,6];
+const APPOINTMENT_TIME='4:00 مساءً';
 
 function norm(s){return s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));}
 function toArabicDigits(num){return String(num).split('').map(ch=>ARABIC_DIGITS[Number(ch)] ?? ch).join('');}
@@ -513,14 +517,16 @@ function renderAvailableDays(){
   if(!container)return;
   const dates=getUpcomingClinicDates();
   const weekdayFmt=new Intl.DateTimeFormat('ar-IQ',{weekday:'long'});
-  const monthFmt=new Intl.DateTimeFormat('ar-IQ',{month:'short'});
+  const monthFmt=new Intl.DateTimeFormat('ar-IQ',{month:'long'});
   container.innerHTML=dates.map(date=>{
     const label=weekdayFmt.format(date);
     const dayNumber=toArabicDigits(date.getDate());
     const monthName=monthFmt.format(date);
-    return `<button type="button" class="chip" data-label="${label}، ${dayNumber} ${monthName}">
+    const value=`${label}، ${dayNumber} ${monthName}، ${APPOINTMENT_TIME}`;
+    return `<button type="button" class="chip" data-label="${value}">
       <span class="label">${label}</span>
-      <span class="date">${dayNumber}</span>
+      <span class="date">${dayNumber} ${monthName}</span>
+      <span class="time">${APPOINTMENT_TIME}</span>
     </button>`;
   }).join('');
   container.querySelectorAll('.chip').forEach(button=>{
@@ -554,7 +560,7 @@ function submit(){
   const data={
     name:$('ptName').value.trim(),
     phone:norm($('ptPhone').value.trim()),
-    preferredDay:$('ptDay').value,
+    preferredDay:$('ptDay').value + ' • ' + APPOINTMENT_TIME,
     timestamp:new Date().toISOString(),
     status:'pending',
     source:'booking-v3'
@@ -577,7 +583,7 @@ function submit(){
 }
 
 function waConfirm(){
-  const t=encodeURIComponent('مرحباً عيادة د. سعد صبري،\nقمت بتسجيل حجز إلكتروني باسم ('+$('ptName').value.trim()+') ليوم ('+$('ptDay').value+').\nأرجو تأكيد الموعد.');
+  const t=encodeURIComponent('مرحباً عيادة د. سعد صبري،\nقمت بتسجيل حجز إلكتروني باسم ('+$('ptName').value.trim()+') ليوم ('+$('ptDay').value+') عند الساعة '+APPOINTMENT_TIME+'.\nأرجو تأكيد الموعد.');
   fbq('trackCustom','WhatsAppContact');
   window.open('https://wa.me/9647707684499?text='+t,'_blank');
 }
